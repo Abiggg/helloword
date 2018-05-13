@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WinImageStrength</class>
+ <widget class="QWidget" name="WinImageStrength">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1177</width>
+    <height>718</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="LbFiterSize">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>610</y>
+     <width>76</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>filter size</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LbInputImage">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>80</y>
+     <width>411</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>input image</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="horizontalSlider">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>630</y>
+     <width>541</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LbOutputImage">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>70</y>
+     <width>391</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>output image</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LbMethod">
+   <property name="geometry">
+    <rect>
+     <x>990</x>
+     <y>210</y>
+     <width>76</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>method</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbOpenFile">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>90</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Open File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbFilter">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>430</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Filter</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbCenter">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>370</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Center</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbAverage">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>250</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Average</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbMax">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>310</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Max</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbbackToMain">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>580</y>
+     <width>191</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>back to main</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbSaveFile">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>150</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save File</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:600;&quot;&gt;Image Strength&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
