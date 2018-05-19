@@ -21,6 +21,7 @@
 #define ERROR 1
 #endif
 
+#define PI 3.14
 
 #define CHECK(x) \
        if(x) \

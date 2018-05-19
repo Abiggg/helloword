@@ -54,19 +54,25 @@ SOURCES       = ../helloworld/main.cpp \
 		../helloworld/mainwindow.cpp \
 		../helloworld/winimagestrength.cpp \
 		../helloworld/winimagefuzzy.cpp \
-		../helloworld/stdqtcvfile.cpp moc_mainwindow.cpp \
+		../helloworld/stdqtcvfile.cpp \
+		../helloworld/stdimagebasic.cpp \
+		../helloworld/mathfun.cpp moc_mainwindow.cpp \
 		moc_winimagestrength.cpp \
 		moc_winimagefuzzy.cpp \
-		moc_stdqtcvfile.cpp
+		moc_stdqtcvfile.cpp \
+		moc_stdimagebasic.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		winimagestrength.o \
 		winimagefuzzy.o \
 		stdqtcvfile.o \
+		stdimagebasic.o \
+		mathfun.o \
 		moc_mainwindow.o \
 		moc_winimagestrength.o \
 		moc_winimagefuzzy.o \
-		moc_stdqtcvfile.o
+		moc_stdqtcvfile.o \
+		moc_stdimagebasic.o
 DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/common/linux.conf \
@@ -246,11 +252,15 @@ DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../helloworld/winimagestrength.h \
 		../helloworld/winimagefuzzy.h \
 		../helloworld/stddatatype.h \
-		../helloworld/stdqtcvfile.h ../helloworld/main.cpp \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/stdimagebasic.h \
+		../helloworld/mathfun.h ../helloworld/main.cpp \
 		../helloworld/mainwindow.cpp \
 		../helloworld/winimagestrength.cpp \
 		../helloworld/winimagefuzzy.cpp \
-		../helloworld/stdqtcvfile.cpp
+		../helloworld/stdqtcvfile.cpp \
+		../helloworld/stdimagebasic.cpp \
+		../helloworld/mathfun.cpp
 QMAKE_TARGET  = helloworld
 DESTDIR       = 
 TARGET        = helloworld
@@ -636,8 +646,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../helloworld/mainwindow.h ../helloworld/winimagestrength.h ../helloworld/winimagefuzzy.h ../helloworld/stddatatype.h ../helloworld/stdqtcvfile.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../helloworld/main.cpp ../helloworld/mainwindow.cpp ../helloworld/winimagestrength.cpp ../helloworld/winimagefuzzy.cpp ../helloworld/stdqtcvfile.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../helloworld/mainwindow.h ../helloworld/winimagestrength.h ../helloworld/winimagefuzzy.h ../helloworld/stddatatype.h ../helloworld/stdqtcvfile.h ../helloworld/stdimagebasic.h ../helloworld/mathfun.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../helloworld/main.cpp ../helloworld/mainwindow.cpp ../helloworld/winimagestrength.cpp ../helloworld/winimagefuzzy.cpp ../helloworld/stdqtcvfile.cpp ../helloworld/stdimagebasic.cpp ../helloworld/mathfun.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../helloworld/mainwindow.ui ../helloworld/winimagestrength.ui ../helloworld/winimagefuzzy.ui $(DISTDIR)/
 
 
@@ -670,9 +680,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_winimagestrength.cpp moc_winimagefuzzy.cpp moc_stdqtcvfile.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_winimagestrength.cpp moc_winimagefuzzy.cpp moc_stdqtcvfile.cpp moc_stdimagebasic.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_winimagestrength.cpp moc_winimagefuzzy.cpp moc_stdqtcvfile.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_winimagestrength.cpp moc_winimagefuzzy.cpp moc_stdqtcvfile.cpp moc_stdimagebasic.cpp
 moc_mainwindow.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -887,6 +897,10 @@ moc_winimagestrength.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget 
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
+		../helloworld/stdimagebasic.h \
 		../helloworld/winimagestrength.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
@@ -995,6 +1009,11 @@ moc_winimagefuzzy.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
+		../helloworld/stdimagebasic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmapcache.h \
 		../helloworld/winimagefuzzy.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
@@ -1104,10 +1123,122 @@ moc_stdqtcvfile.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
 		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
 		../helloworld/stdqtcvfile.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
 	/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/linux-g++ -I/home/abig/project/project4/hello/helloworld -I/usr/local/include/opencv -I/opt/Qt5.10.0/5.10.0/gcc_64/include -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../helloworld/stdqtcvfile.h -o moc_stdqtcvfile.cpp
+
+moc_stdimagebasic.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qset.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../helloworld/stddatatype.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/mathfun.h \
+		../helloworld/stdimagebasic.h \
+		moc_predefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
+	/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/linux-g++ -I/home/abig/project/project4/hello/helloworld -I/usr/local/include/opencv -I/opt/Qt5.10.0/5.10.0/gcc_64/include -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../helloworld/stdimagebasic.h -o moc_stdimagebasic.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1402,6 +1533,11 @@ mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qstatusbar.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
 		../helloworld/winimagefuzzy.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
+		../helloworld/stdimagebasic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmapcache.h \
 		../helloworld/winimagestrength.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../helloworld/mainwindow.cpp
 
@@ -1509,6 +1645,10 @@ winimagestrength.o: ../helloworld/winimagestrength.cpp ../helloworld/winimagestr
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
+		../helloworld/stdimagebasic.h \
 		ui_winimagestrength.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAction \
@@ -1554,9 +1694,7 @@ winimagestrength.o: ../helloworld/winimagestrength.cpp ../helloworld/winimagestr
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtextoption.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtextcursor.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtextformat.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpen.h \
-		../helloworld/stdqtcvfile.h \
-		../helloworld/stddatatype.h
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o winimagestrength.o ../helloworld/winimagestrength.cpp
 
 winimagefuzzy.o: ../helloworld/winimagefuzzy.cpp ../helloworld/winimagefuzzy.h \
@@ -1663,6 +1801,11 @@ winimagefuzzy.o: ../helloworld/winimagefuzzy.cpp ../helloworld/winimagefuzzy.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
+		../helloworld/stdimagebasic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmapcache.h \
 		ui_winimagefuzzy.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAction \
@@ -1816,6 +1959,7 @@ stdqtcvfile.o: ../helloworld/stdqtcvfile.cpp ../helloworld/stdqtcvfile.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
 		../helloworld/stddatatype.h \
+		../helloworld/mathfun.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QMenu \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qmenu.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qicon.h \
@@ -1834,6 +1978,119 @@ stdqtcvfile.o: ../helloworld/stdqtcvfile.cpp ../helloworld/stdqtcvfile.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stdqtcvfile.o ../helloworld/stdqtcvfile.cpp
 
+stdimagebasic.o: ../helloworld/stdimagebasic.cpp ../helloworld/stdimagebasic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qset.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../helloworld/stddatatype.h \
+		../helloworld/stdqtcvfile.h \
+		../helloworld/mathfun.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stdimagebasic.o ../helloworld/stdimagebasic.cpp
+
+mathfun.o: ../helloworld/mathfun.cpp ../helloworld/mathfun.h \
+		../helloworld/stddatatype.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mathfun.o ../helloworld/mathfun.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
@@ -1845,6 +2102,9 @@ moc_winimagefuzzy.o: moc_winimagefuzzy.cpp
 
 moc_stdqtcvfile.o: moc_stdqtcvfile.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_stdqtcvfile.o moc_stdqtcvfile.cpp
+
+moc_stdimagebasic.o: moc_stdimagebasic.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_stdimagebasic.o moc_stdimagebasic.cpp
 
 ####### Install
 

@@ -3,6 +3,17 @@
 
 #include <QWidget>
 
+#include <iostream>
+#include<opencv2/core/core.hpp>
+#include<opencv2/highgui/highgui.hpp>
+#include<opencv2/imgproc/imgproc.hpp>
+
+#include "stdqtcvfile.h"
+#include "stdimagebasic.h"
+
+using namespace cv;
+using namespace std;
+
 namespace Ui {
 class WinImageStrength;
 }
@@ -29,6 +40,12 @@ signals:
 
 private:
     Ui::WinImageStrength *ui;
+    QtCvFile QtCv;
+    stdImageBasic ImageBasic;
+    Mat matIn;
+    QImage QImgIn;
+    Mat matOut;
+    QImage QImgOut;
 };
 
 #endif // WINIMAGESTRENGTH_H

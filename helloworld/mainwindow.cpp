@@ -22,6 +22,8 @@ void MainWindow::on_PbImageFuzzy_clicked()
     this->hide();//主界面关闭
     WinImageFuzzy *fuzzy = new WinImageFuzzy();//新建子界面
     connect(fuzzy,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
+    QPixmapCache::setCacheLimit(1);
+    fuzzy->FilterSize = 1;
     fuzzy->show();//子界面出现
 }
 

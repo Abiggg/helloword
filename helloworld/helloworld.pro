@@ -28,14 +28,18 @@ SOURCES += \
     mainwindow.cpp \
     winimagestrength.cpp \
     winimagefuzzy.cpp \
-    stdqtcvfile.cpp
+    stdqtcvfile.cpp \
+    stdimagebasic.cpp \
+    mathfun.cpp
 
 HEADERS += \
     mainwindow.h \
     winimagestrength.h \
     winimagefuzzy.h \
     stddatatype.h \
-    stdqtcvfile.h
+    stdqtcvfile.h \
+    stdimagebasic.h \
+    mathfun.h
 
 FORMS += \
     mainwindow.ui \

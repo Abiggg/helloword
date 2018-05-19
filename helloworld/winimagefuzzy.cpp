@@ -1,11 +1,6 @@
 #include "winimagefuzzy.h"
 #include "ui_winimagefuzzy.h"
 
-#include <iostream>
-#include<opencv2/core/core.hpp>
-#include<opencv2/highgui/highgui.hpp>
-#include<opencv2/imgproc/imgproc.hpp>
-
 using namespace cv;
 using namespace std;
 
@@ -21,17 +16,67 @@ WinImageFuzzy::~WinImageFuzzy()
     delete ui;
 }
 
-void WinImageFuzzy::on_PbOpenFile_clicked()
-{
-    Mat src1 = imread("/home/abig/dog.jpg" );//读入一站图片 暂时读入桌面上的一个文件
-    cvtColor(src1,src1,CV_BGR2RGB);//opencv读取图片按照BGR方式读取，为了正常显示，所以将BGR转为RGB
-    QImage showImage((const uchar*)src1.data,src1.cols,src1.rows,src1.cols*src1.channels(),QImage::Format_RGB888);
-
-    ui->LbInputImage->setPixmap(QPixmap::fromImage(showImage));
-}
-
 void WinImageFuzzy::on_PbbackToMain_clicked()
 {
     emit WinDisplay();
     this->close();
+}
+
+void WinImageFuzzy::on_PbOpenFile_clicked()
+{
+    CHECK(QtCv.OpenImageFile(matIn));   //open image file
+    CHECK(QtCv.cvMat2QImage(matIn,QImgIn));     //convert image file
+    ui->LbInputImage->setPixmap(QPixmap::fromImage(QImgIn)); //show image in inputLable
+}
+
+void WinImageFuzzy::on_PbSaveFile_clicked()
+{
+    CHECK(QtCv.QImage2cvMat(QImgOut, matOut)); //change qimg to img
+    CHECK(QtCv.SaveImageFile(matOut)); //save image
+}
+
+void WinImageFuzzy::on_PbAverage_clicked()
+{
+    QImage *qimg;
+    qimg = new QImage((unsigned char*)matIn.data, // uchar* data
+            matIn.cols, matIn.rows, // width height
+            matIn.step, //bytesPerLine
+            QImage::Format_RGB888); //format
+    CHECK(ImageBasic.ImageFuzzyAverage(matIn, qimg, FilterSize));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(*qimg));
+    delete qimg;
+    qimg = NULL;
+}
+
+void WinImageFuzzy::on_horizontalSlider_sliderMoved(int position)
+{
+    FilterSize = position*2+1;
+    if(FilterSize > 99)
+    {
+        FilterSize = 99;
+    }
+    QString n = QString::number(FilterSize,10);
+    ui->LbFiterSizeValue->setText(n);
+}
+
+void WinImageFuzzy::on_PbClear_clicked()
+{
+     ui->LbOutputImage->clear();
+     QPixmapCache::clear();
+}
+
+
+
+void WinImageFuzzy::on_PbGaussian_clicked()
+{
+    QImage *qimg;
+    qimg = new QImage((unsigned char*)matIn.data, // uchar* data
+            matIn.cols, matIn.rows, // width height
+            matIn.step, //bytesPerLine
+            QImage::Format_RGB888); //format
+
+    CHECK(ImageBasic.ImageGaussian(matIn,qimg,FilterSize));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(*qimg));
+    delete qimg;
+    qimg = NULL;
 }
