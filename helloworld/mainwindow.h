@@ -35,9 +35,6 @@ public:
 
 private slots:
     void reshow();
-    void on_PbImageFuzzy_clicked();
-    void on_PbImageStrength_clicked();
-    void on_PbImageTransform_clicked();
     void on_PbPhotoGraph_clicked();
 
     void on_PbImageTransform_3_clicked();

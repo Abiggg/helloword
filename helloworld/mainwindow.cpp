@@ -2,9 +2,6 @@
 #include "ui_mainwindow.h"
 #include <stdbool.h>
 
-#include "winimagetransform.h"
-#include "winimagefuzzy.h"
-#include "winimagestrength.h"
 #include "winbeatifyphoto.h"
 
 #include<opencv2/core/core.hpp>
@@ -61,33 +58,13 @@ void MainWindow::reshow()
 
 
 /*image Transform*/
-void MainWindow::on_PbImageTransform_clicked()
-{
-    this->hide();//主界面关闭
-    WinImageTransform *Transform = new WinImageTransform();//新建子界面
-    connect(Transform,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-    Transform->show();//子界面出现
-}
+
 
 /*image Fuzzy*/
-void MainWindow::on_PbImageFuzzy_clicked()
-{
-    this->hide();//主界面关闭
-    WinImageFuzzy *fuzzy = new WinImageFuzzy();//新建子界面
-    connect(fuzzy,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-    QPixmapCache::setCacheLimit(1);
-    fuzzy->FilterSize = 1;
-    fuzzy->show();//子界面出现
-}
+
 
 /*image Segmetation*/
-void MainWindow::on_PbImageStrength_clicked()
-{
-    this->hide();//主界面关闭
-    WinImageStrength *fuzzy = new WinImageStrength();//新建子界面
-    connect(fuzzy,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-    fuzzy->show();//子界面出现
-}
+
 
 
 void MainWindow::on_PbPhotoGraph_clicked()
