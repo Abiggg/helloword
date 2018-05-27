@@ -29,7 +29,6 @@ public:
     QPushButton *PbGaussian;
     QLabel *LbInputImage;
     QPushButton *PbSaveFile;
-    QPushButton *PbCenter;
     QLabel *LbFiterSize;
     QLabel *LbMethod;
     QSlider *horizontalSlider;
@@ -39,7 +38,6 @@ public:
     QPushButton *PbFilter;
     QTextEdit *Topic;
     QLabel *LbFiterSizeValue;
-    QPushButton *PbClear;
 
     void setupUi(QWidget *WinImageFuzzy)
     {
@@ -58,9 +56,6 @@ public:
         PbSaveFile = new QPushButton(WinImageFuzzy);
         PbSaveFile->setObjectName(QStringLiteral("PbSaveFile"));
         PbSaveFile->setGeometry(QRect(990, 140, 131, 41));
-        PbCenter = new QPushButton(WinImageFuzzy);
-        PbCenter->setObjectName(QStringLiteral("PbCenter"));
-        PbCenter->setGeometry(QRect(990, 360, 131, 41));
         LbFiterSize = new QLabel(WinImageFuzzy);
         LbFiterSize->setObjectName(QStringLiteral("LbFiterSize"));
         LbFiterSize->setGeometry(QRect(50, 590, 101, 31));
@@ -85,16 +80,13 @@ public:
         PbbackToMain->setGeometry(QRect(970, 570, 191, 71));
         PbFilter = new QPushButton(WinImageFuzzy);
         PbFilter->setObjectName(QStringLiteral("PbFilter"));
-        PbFilter->setGeometry(QRect(990, 420, 131, 41));
+        PbFilter->setGeometry(QRect(990, 370, 131, 41));
         Topic = new QTextEdit(WinImageFuzzy);
         Topic->setObjectName(QStringLiteral("Topic"));
         Topic->setGeometry(QRect(10, 10, 161, 31));
         LbFiterSizeValue = new QLabel(WinImageFuzzy);
         LbFiterSizeValue->setObjectName(QStringLiteral("LbFiterSizeValue"));
         LbFiterSizeValue->setGeometry(QRect(150, 600, 76, 19));
-        PbClear = new QPushButton(WinImageFuzzy);
-        PbClear->setObjectName(QStringLiteral("PbClear"));
-        PbClear->setGeometry(QRect(990, 510, 131, 41));
 
         retranslateUi(WinImageFuzzy);
 
@@ -108,7 +100,6 @@ public:
         PbGaussian->setText(QApplication::translate("WinImageFuzzy", "Gaussian", nullptr));
         LbInputImage->setText(QApplication::translate("WinImageFuzzy", "input image", nullptr));
         PbSaveFile->setText(QApplication::translate("WinImageFuzzy", "Save File", nullptr));
-        PbCenter->setText(QApplication::translate("WinImageFuzzy", "Center", nullptr));
         LbFiterSize->setText(QApplication::translate("WinImageFuzzy", "filter size:", nullptr));
         LbMethod->setText(QApplication::translate("WinImageFuzzy", "method", nullptr));
         LbOutputImage->setText(QApplication::translate("WinImageFuzzy", "output image", nullptr));
@@ -121,7 +112,6 @@ public:
 "</style></head><body style=\" font-family:'Ubuntu'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Image Fuzzy</span></p></body></html>", nullptr));
         LbFiterSizeValue->setText(QApplication::translate("WinImageFuzzy", "1", nullptr));
-        PbClear->setText(QApplication::translate("WinImageFuzzy", "clear", nullptr));
     } // retranslateUi
 
 };

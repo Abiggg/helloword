@@ -24,10 +24,34 @@ class QtCvFile : public QWidget
         uint32 QImage2cvMat(QImage Qimg, Mat& mat); //convert image to Mat
         uint32 SplitBGRToMat(Mat mat, Mat& BlueMat, Mat& GreenMat, Mat& RedMat); //split 3 channel into 1 channel
         uint32 MergeBRGtoMat(Mat BlueMat, Mat GreenMat, Mat RedMat, Mat& mat); //merge 3 single-channel into 3 channel image
-        uint32 FilterCountAverage(Mat InputMat, Mat& OutputMat, uint32 add[3], Mat Filter);
+        uint32 CreatTempMat(Mat InputMat, Mat& OutputMat);
+        uint32 CreatTempFilter(Mat InputMat, uint8 FilterSize, Mat &Filter);
+        uint32 CreatFloatFilter(Mat InputMat, uint32 FilterSize, Mat &Filter);
+        /*Filter*/
         uint32 AverageFilter(uint8 FilterSize, uint32 sum[3], Mat& Filter);
-        uint32 GaussianFilter(uint8 FilterSize, uint32 sum[3], float sigma, Mat &Filter);
-        uint32 LaplaceFilter(Mat &Filter);
+        uint32 GaussianFilter(uint8 FilterSize, uint32 sum[3], float sigma, Mat &Filter); /*average Filter*/
+        uint32 LaplaceFilter(Mat &Filter);/*laplace Filter*/
+        uint32 CountHistogram(Mat InputMat,int distribution[3][255]);
+        uint32 HistogramTransform(Mat InputMat, int distribution[3][255], Mat& OutputMat);
+
+        uint32 BinaryTransform(Mat InputMat, Mat& OutputMat);
+        uint32 GrayscalTransform(Mat InputMat, Mat& OutputMat);
+        uint32 DataTypeTransform(Mat InputMat, Mat& OutputMat);
+        uint32 MinorYTransform(Mat InputMat, Mat& OutputMat);
+        uint32 MinorXTransform(Mat InputMat, Mat& OutputMat);
+        uint32 BrightTransform(Mat InputMat, Mat& OutputMat, uint32 RatioBrightness);
+        uint32 ConstrastTransform(Mat InputMat, Mat& OutputMat, uint32 RatioConstrast);
+        uint32 SaturationTransform(Mat InputMat, Mat& OutputMat, uint32 RatioSaturation);
+        uint32 ShapenTransform(Mat InputMat, Mat& OutputMat, Mat Filter, uint32 RatioShapen);
+        uint32 CorrosionTransform(Mat InputMat, Mat& OutputMat, int FilterSize);
+        uint32 ExpandTransform(Mat InputMat, Mat& OutputMat, int FilterSize);
+        /*style*/
+        uint32 ClassicalTransform(Mat InputMat, Mat& OutputMat);
+        uint32 SketchTransform(Mat InputMat,Mat& OutputMat, uint32 SketchThreshold);
+        uint32 OilPaintTransform(Mat InputMat,Mat& OutputMat, uint32 FilterSize);
+        /*Filter */
+        uint32 FilterCountAverage(Mat InputMat, Mat& OutputMat, uint32 add[3], Mat Filter); /**/
+        uint32 FilterCountSum(Mat InputMat, Mat& OutputMat, Mat Filter);
 
     private:
         MathFun mathfun;

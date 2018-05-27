@@ -26,25 +26,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     mainwindow.cpp \
-    winimagestrength.cpp \
-    winimagefuzzy.cpp \
     stdqtcvfile.cpp \
     stdimagebasic.cpp \
-    mathfun.cpp
+    mathfun.cpp \
+    winbeatifyphoto.cpp
 
 HEADERS += \
     mainwindow.h \
-    winimagestrength.h \
-    winimagefuzzy.h \
     stddatatype.h \
     stdqtcvfile.h \
     stdimagebasic.h \
-    mathfun.h
+    mathfun.h \
+    winbeatifyphoto.h
 
 FORMS += \
     mainwindow.ui \
-    winimagestrength.ui \
-    winimagefuzzy.ui
+    winbeatifyphoto.ui
 
 DISTFILES +=
 
@@ -61,6 +58,11 @@ LIBS += -L/usr/local/lib -lopencv_core\
 -lopencv_calib3d\
 -lopencv_objdetect\
 -lopencv_flann\
--lopencv_imgcodecs
+-lopencv_imgcodecs\
+-lopencv_shape\
+-lopencv_videoio
+
+RESOURCES += \
+    defaultphoto.qrc
 
 

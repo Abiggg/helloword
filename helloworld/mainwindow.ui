@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1150</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="PbImageFuzzy">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>110</y>
-      <width>141</width>
+      <x>970</x>
+      <y>170</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
@@ -27,12 +27,12 @@
      <string>Image fuzzy</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="PbImageFilter">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>141</width>
+      <x>970</x>
+      <y>240</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
@@ -43,9 +43,9 @@
    <widget class="QPushButton" name="PbImageStrength">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>250</y>
-      <width>141</width>
+      <x>970</x>
+      <y>310</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
@@ -53,30 +53,82 @@
      <string>Image strength</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="PbImageMorphology">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>310</y>
-      <width>141</width>
+      <x>970</x>
+      <y>380</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Image corrosion</string>
+     <string>Image morphology</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="PbImageTransform">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>141</width>
+      <x>970</x>
+      <y>100</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Image sharpen</string>
+     <string>Image Transform</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LbCameraArea">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>40</y>
+      <width>551</width>
+      <height>461</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Camera Area</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PbPhotoGraph">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>550</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PhotoGraph</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PbImageTransform_3">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>550</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>beautifyPhoto</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PbImageTransform_4">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>550</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AImage</string>
     </property>
    </widget>
   </widget>
@@ -85,7 +137,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1150</width>
      <height>31</height>
     </rect>
    </property>

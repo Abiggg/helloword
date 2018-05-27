@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/temp">
+        <file>bitch.png</file>
+    </qresource>
+</RCC>

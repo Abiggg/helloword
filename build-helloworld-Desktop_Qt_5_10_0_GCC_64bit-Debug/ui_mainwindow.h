@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -27,10 +28,14 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QPushButton *PbImageFuzzy;
-    QPushButton *pushButton_2;
+    QPushButton *PbImageFilter;
     QPushButton *PbImageStrength;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_5;
+    QPushButton *PbImageMorphology;
+    QPushButton *PbImageTransform;
+    QLabel *LbCameraArea;
+    QPushButton *PbPhotoGraph;
+    QPushButton *PbImageTransform_3;
+    QPushButton *PbImageTransform_4;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -38,28 +43,40 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(1150, 669);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         PbImageFuzzy = new QPushButton(centralwidget);
         PbImageFuzzy->setObjectName(QStringLiteral("PbImageFuzzy"));
-        PbImageFuzzy->setGeometry(QRect(20, 110, 141, 41));
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(20, 180, 141, 41));
+        PbImageFuzzy->setGeometry(QRect(970, 170, 161, 41));
+        PbImageFilter = new QPushButton(centralwidget);
+        PbImageFilter->setObjectName(QStringLiteral("PbImageFilter"));
+        PbImageFilter->setGeometry(QRect(970, 240, 161, 41));
         PbImageStrength = new QPushButton(centralwidget);
         PbImageStrength->setObjectName(QStringLiteral("PbImageStrength"));
-        PbImageStrength->setGeometry(QRect(20, 250, 141, 41));
-        pushButton_4 = new QPushButton(centralwidget);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setGeometry(QRect(20, 310, 141, 41));
-        pushButton_5 = new QPushButton(centralwidget);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setGeometry(QRect(20, 40, 141, 41));
+        PbImageStrength->setGeometry(QRect(970, 310, 161, 41));
+        PbImageMorphology = new QPushButton(centralwidget);
+        PbImageMorphology->setObjectName(QStringLiteral("PbImageMorphology"));
+        PbImageMorphology->setGeometry(QRect(970, 380, 161, 41));
+        PbImageTransform = new QPushButton(centralwidget);
+        PbImageTransform->setObjectName(QStringLiteral("PbImageTransform"));
+        PbImageTransform->setGeometry(QRect(970, 100, 161, 41));
+        LbCameraArea = new QLabel(centralwidget);
+        LbCameraArea->setObjectName(QStringLiteral("LbCameraArea"));
+        LbCameraArea->setGeometry(QRect(160, 40, 551, 461));
+        PbPhotoGraph = new QPushButton(centralwidget);
+        PbPhotoGraph->setObjectName(QStringLiteral("PbPhotoGraph"));
+        PbPhotoGraph->setGeometry(QRect(160, 550, 161, 41));
+        PbImageTransform_3 = new QPushButton(centralwidget);
+        PbImageTransform_3->setObjectName(QStringLiteral("PbImageTransform_3"));
+        PbImageTransform_3->setGeometry(QRect(380, 550, 161, 41));
+        PbImageTransform_4 = new QPushButton(centralwidget);
+        PbImageTransform_4->setObjectName(QStringLiteral("PbImageTransform_4"));
+        PbImageTransform_4->setGeometry(QRect(610, 550, 161, 41));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 31));
+        menubar->setGeometry(QRect(0, 0, 1150, 31));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -74,10 +91,14 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         PbImageFuzzy->setText(QApplication::translate("MainWindow", "Image fuzzy", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Image filter", nullptr));
+        PbImageFilter->setText(QApplication::translate("MainWindow", "Image filter", nullptr));
         PbImageStrength->setText(QApplication::translate("MainWindow", "Image strength", nullptr));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Image corrosion", nullptr));
-        pushButton_5->setText(QApplication::translate("MainWindow", "Image sharpen", nullptr));
+        PbImageMorphology->setText(QApplication::translate("MainWindow", "Image morphology", nullptr));
+        PbImageTransform->setText(QApplication::translate("MainWindow", "Image Transform", nullptr));
+        LbCameraArea->setText(QApplication::translate("MainWindow", "Camera Area", nullptr));
+        PbPhotoGraph->setText(QApplication::translate("MainWindow", "PhotoGraph", nullptr));
+        PbImageTransform_3->setText(QApplication::translate("MainWindow", "beautifyPhoto", nullptr));
+        PbImageTransform_4->setText(QApplication::translate("MainWindow", "AImage", nullptr));
     } // retranslateUi
 
 };

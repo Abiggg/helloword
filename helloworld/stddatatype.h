@@ -21,6 +21,9 @@
 #define ERROR 1
 #endif
 
+#define Lock 0
+#define unLock 1
+
 #define PI 3.14
 
 #define CHECK(x) \
@@ -29,5 +32,39 @@
            cout<<"error"<<endl;\
            return ;\
        }
+
+#define CHECK_CODE(x,code) \
+    if(x) \
+    {\
+         cout<<"error is "<< x << endl;\
+         return ((x<<4) | code); \
+    }
+
+#define MAXVALUE(x,y) \
+    (x>y?x:y);
+
+#define MINVALUE(x,y) \
+    (x<y?x:y)
+
+typedef enum ERROR_CODE
+{
+    ERROR_CODE_0 = 1,
+    ERROR_CODE_1,
+    ERROR_CODE_2,
+    ERROR_CODE_3,
+    ERROR_CODE_4,
+    ERROR_CODE_5,
+    ERROR_CODE_6,
+    ERROR_CODE_7,
+    ERROR_CODE_8,
+    ERROR_CODE_9,
+    ERROR_CODE_10,
+    ERROR_CODE_11,
+    ERROR_CODE_12,
+    ERROR_CODE_13,
+    ERROR_CODE_14,
+    ERROR_CODE_15,
+    ERROR_CODE_16,
+}ERROR_CODE_E;
 
 #endif // STDDATATYPE_H
