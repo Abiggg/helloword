@@ -24,6 +24,7 @@ class QtCvFile : public QWidget
         uint32 QImage2cvMat(QImage Qimg, Mat& mat); //convert image to Mat
         uint32 SplitBGRToMat(Mat mat, Mat& BlueMat, Mat& GreenMat, Mat& RedMat); //split 3 channel into 1 channel
         uint32 MergeBRGtoMat(Mat BlueMat, Mat GreenMat, Mat RedMat, Mat& mat); //merge 3 single-channel into 3 channel image
+        uint32 CompareMat(Mat matA, Mat matB, int& flag);
         uint32 CreatTempMat(Mat InputMat, Mat& OutputMat);
         uint32 CreatTempFilter(Mat InputMat, uint8 FilterSize, Mat &Filter);
         /*Filter*/
@@ -34,11 +35,12 @@ class QtCvFile : public QWidget
         uint32 CountHistogram(Mat InputMat,int distribution[3][255]);
         uint32 HistogramTransform(Mat InputMat, int distribution[3][255], Mat& OutputMat);
 
-        uint32 BinaryTransform(Mat InputMat, Mat& OutputMat);
+        uint32 BinaryTransform(Mat InputMat, Mat& OutputMat, uint32 BinaryThrehold);
         uint32 GrayscalTransform(Mat InputMat, Mat& OutputMat);
         uint32 DataTypeTransform(Mat InputMat, Mat& OutputMat);
         uint32 MinorYTransform(Mat InputMat, Mat& OutputMat);
         uint32 MinorXTransform(Mat InputMat, Mat& OutputMat);
+        uint32 RatationTransform(Mat InputMat, Mat& OutputMat, int angle);
         uint32 BrightTransform(Mat InputMat, Mat& OutputMat, uint32 RatioBrightness);
         uint32 ConstrastTransform(Mat InputMat, Mat& OutputMat, uint32 RatioConstrast);
         uint32 SaturationTransform(Mat InputMat, Mat& OutputMat, uint32 RatioSaturation);

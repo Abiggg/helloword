@@ -108,6 +108,7 @@ uint32 QtCvFile::cvMat2QImage(Mat mat, QImage& Qimg)
         qDebug() << "ERROR: Mat could not be converted to QImage.";
         return ERROR;
     }
+    return OK;
 }
 
 /*convert QImage to Mat*/
@@ -153,6 +154,56 @@ uint32 QtCvFile::MergeBRGtoMat(Mat BlueMat, Mat GreenMat, Mat RedMat, Mat& mat)
     channels.push_back(GreenMat);
     channels.push_back(RedMat);
     merge(channels,mat);
+    return OK;
+}
+
+/*compare two if mat is equral*/
+unsigned int QtCvFile::CompareMat(Mat matA, Mat matB, int& flag)
+{
+    int i = 0;
+    int j = 0;
+    int chl = 0;
+    if(matA.channels() == 1)
+    {
+        for(i=0;i<matA.rows;i++)
+        {
+            for(j=0;j<matA.cols;j++)
+            {
+                if(matA.at<uchar>(i,j) == matB.at<uchar>(i,j))
+                {
+                    continue;
+                }
+                else
+                {
+                    flag = 1;
+                    return OK;
+                }
+            }
+        }
+        flag = 0;
+    }
+    else if(matA.channels() == 3)
+    {
+        for(chl=0;chl<matA.channels();chl++)
+        {
+            for(i=0;i<matA.rows;i++)
+            {
+                for(j=0;j<matA.cols;j++)
+                {
+                    if(matA.at<Vec3b>(i,j)[chl] == matB.at<Vec3b>(i,j)[chl])
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        flag = 1;
+                        return OK;
+                    }
+                }
+            }
+        }
+        flag = 0;
+    }
     return OK;
 }
 
@@ -340,7 +391,7 @@ unsigned int QtCvFile::HistogramTransform(Mat InputMat, int distribution[3][255]
 /*************************************************************************************************/
 
 /*HistogramTransform*/
-uint32 QtCvFile::BinaryTransform(Mat InputMat, Mat &OutputMat)
+uint32 QtCvFile::BinaryTransform(Mat InputMat, Mat &OutputMat, uint32 BinaryThrehold)
 {
     int i=0;
     int j=0;
@@ -353,11 +404,11 @@ uint32 QtCvFile::BinaryTransform(Mat InputMat, Mat &OutputMat)
             {
                 if(InputMat.channels() == 1)
                 {
-                    OutputMat.at<uchar>(i,j) =mathfun.Binary(InputMat.at<uchar>(i,j));
+                    OutputMat.at<uchar>(i,j) =mathfun.Binary(InputMat.at<uchar>(i,j), BinaryThrehold);
                 }
                 else if(InputMat.channels() == 3)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] =mathfun.Binary(InputMat.at<Vec3b>(i,j)[chl]);
+                    OutputMat.at<Vec3b>(i,j)[chl] =mathfun.Binary(InputMat.at<Vec3b>(i,j)[chl], BinaryThrehold);
                 }
                 else
                 {
@@ -516,6 +567,27 @@ unsigned int QtCvFile::MinorXTransform(Mat InputMat, Mat &OutputMat)
         return ERROR;
     }
 
+    return OK;
+}
+
+/*ratation transform*/
+unsigned int QtCvFile::RatationTransform(Mat InputMat, Mat &OutputMat, int angle)
+{
+    int i = 0;
+    int j = 0;
+    int chl = 0;
+    if(InputMat.channels() == 1)
+    {
+
+    }
+    else if(InputMat.channels() == 3)
+    {
+
+    }
+    else
+    {
+        return ERROR;
+    }
     return OK;
 }
 

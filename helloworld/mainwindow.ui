@@ -105,7 +105,7 @@
      <string>PhotoGraph</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="PbImageTransform_3">
+   <widget class="QPushButton" name="PbBeautifyPhoto">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -118,7 +118,7 @@
      <string>beautifyPhoto</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="PbImageTransform_4">
+   <widget class="QPushButton" name="PbAiPhoto">
     <property name="geometry">
      <rect>
       <x>610</x>

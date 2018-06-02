@@ -34,8 +34,8 @@ public:
     QPushButton *PbImageTransform;
     QLabel *LbCameraArea;
     QPushButton *PbPhotoGraph;
-    QPushButton *PbImageTransform_3;
-    QPushButton *PbImageTransform_4;
+    QPushButton *PbBeautifyPhoto;
+    QPushButton *PbAiPhoto;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -67,12 +67,12 @@ public:
         PbPhotoGraph = new QPushButton(centralwidget);
         PbPhotoGraph->setObjectName(QStringLiteral("PbPhotoGraph"));
         PbPhotoGraph->setGeometry(QRect(160, 550, 161, 41));
-        PbImageTransform_3 = new QPushButton(centralwidget);
-        PbImageTransform_3->setObjectName(QStringLiteral("PbImageTransform_3"));
-        PbImageTransform_3->setGeometry(QRect(380, 550, 161, 41));
-        PbImageTransform_4 = new QPushButton(centralwidget);
-        PbImageTransform_4->setObjectName(QStringLiteral("PbImageTransform_4"));
-        PbImageTransform_4->setGeometry(QRect(610, 550, 161, 41));
+        PbBeautifyPhoto = new QPushButton(centralwidget);
+        PbBeautifyPhoto->setObjectName(QStringLiteral("PbBeautifyPhoto"));
+        PbBeautifyPhoto->setGeometry(QRect(380, 550, 161, 41));
+        PbAiPhoto = new QPushButton(centralwidget);
+        PbAiPhoto->setObjectName(QStringLiteral("PbAiPhoto"));
+        PbAiPhoto->setGeometry(QRect(610, 550, 161, 41));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -97,8 +97,8 @@ public:
         PbImageTransform->setText(QApplication::translate("MainWindow", "Image Transform", nullptr));
         LbCameraArea->setText(QApplication::translate("MainWindow", "Camera Area", nullptr));
         PbPhotoGraph->setText(QApplication::translate("MainWindow", "PhotoGraph", nullptr));
-        PbImageTransform_3->setText(QApplication::translate("MainWindow", "beautifyPhoto", nullptr));
-        PbImageTransform_4->setText(QApplication::translate("MainWindow", "AImage", nullptr));
+        PbBeautifyPhoto->setText(QApplication::translate("MainWindow", "beautifyPhoto", nullptr));
+        PbAiPhoto->setText(QApplication::translate("MainWindow", "AImage", nullptr));
     } // retranslateUi
 
 };

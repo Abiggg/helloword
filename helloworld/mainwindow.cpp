@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "winbeatifyphoto.h"
+#include "winaiphoto.h"
 
 #include<opencv2/core/core.hpp>
 #include<opencv2/highgui/highgui.hpp>
@@ -18,6 +19,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    BeatifyPhoto = new WinBeatifyPhoto();/*creat a image beatify win*/
+    AiPhoto = new winAiPhoto();/*creat a AI photo win*/
+
+    connect(this->BeatifyPhoto,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
+    connect(this->BeatifyPhoto,SIGNAL(WinAiDisplay(Mat)),AiPhoto,SLOT(on_gotoAiPhoto_clicked_reshow(Mat)));//当点击子界面时，调用主界面的reshow()函数
+
+    connect(this->AiPhoto, SIGNAL(WinDisplay()), this, SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
+    connect(this->AiPhoto, SIGNAL(WinBeatifyDisplay(Mat)), BeatifyPhoto, SLOT(on_gotoBeatifyPhoto_clicked_reshow(Mat)));//当点击子界面时，调用主界面的reshow()函数
 }
 
 MainWindow::~MainWindow()
@@ -56,23 +65,13 @@ void MainWindow::reshow()
     this->show();
 }
 
-
-/*image Transform*/
-
-
-/*image Fuzzy*/
-
-
-/*image Segmetation*/
-
-
-
 void MainWindow::on_PbPhotoGraph_clicked()
 {
     OpenCamera();
 }
 
-void MainWindow::on_PbImageTransform_3_clicked()
+#if 0
+void MainWindow::on_PbBeautifyPhoto_clicked()
 {
     this->hide();//主界面关闭
     WinBeatifyPhoto *BeatifyPhoto = new WinBeatifyPhoto();//新建子界面
@@ -91,12 +90,42 @@ void MainWindow::on_PbImageTransform_3_clicked()
     BeatifyPhoto->WinInit();
     BeatifyPhoto->show();//子界面出现
 }
+#endif
 
-void MainWindow::on_PbImageMorphology_clicked()
+
+/*open BeautifyPhoto win*/
+void MainWindow::on_PbBeautifyPhoto_clicked()
 {
     this->hide();//主界面关闭
-    WinBeatifyPhoto *BeatifyPhoto = new WinBeatifyPhoto();//新建子界面
-    connect(BeatifyPhoto,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-    //BeatifyPhoto->matIn = srcMat;
-    //BeatifyPhoto->QImgIn = srcQImg;
+
+    this->BeatifyPhoto->matIn = srcMat;
+    this->BeatifyPhoto->QImgIn = srcQImg;
+    if(!srcMat.empty())
+    {
+         this->BeatifyPhoto->PhotoFlag = true;
+    }
+    else
+    {
+        this->BeatifyPhoto->PhotoFlag = false;
+    }
+    this->BeatifyPhoto->WinInit();
+    this->BeatifyPhoto->show();//子界面出现
+}
+
+/*Open AiPhoto win*/
+void MainWindow::on_PbAiPhoto_clicked()
+{
+    this->hide();//主界面关闭
+    this->AiPhoto->matIn = srcMat;
+    this->AiPhoto->QImgIn = srcQImg;
+    if(!srcMat.empty())
+    {
+         this->AiPhoto->PhotoFlag = true;
+    }
+    else
+    {
+        this->AiPhoto->PhotoFlag = false;
+    }
+    this->AiPhoto->winAiPhotoInit();
+    this->AiPhoto->show();//子界面出现
 }

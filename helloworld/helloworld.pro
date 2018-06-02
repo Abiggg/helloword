@@ -29,7 +29,9 @@ SOURCES += \
     stdqtcvfile.cpp \
     stdimagebasic.cpp \
     mathfun.cpp \
-    winbeatifyphoto.cpp
+    winbeatifyphoto.cpp \
+    winaiphoto.cpp \
+    datast.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -37,11 +39,14 @@ HEADERS += \
     stdqtcvfile.h \
     stdimagebasic.h \
     mathfun.h \
-    winbeatifyphoto.h
+    winbeatifyphoto.h \
+    winaiphoto.h \
+    datast.h
 
 FORMS += \
     mainwindow.ui \
-    winbeatifyphoto.ui
+    winbeatifyphoto.ui \
+    winaiphoto.ui
 
 DISTFILES +=
 

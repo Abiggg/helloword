@@ -1,9 +1,12 @@
 #include "winbeatifyphoto.h"
 #include "ui_winbeatifyphoto.h"
 #include <QString>
+#include "winaiphoto.h"
 
 using namespace cv;
 using namespace std;
+
+/****************************************************************************************file open start*/
 
 WinBeatifyPhoto::WinBeatifyPhoto(QWidget *parent) :
     QWidget(parent),
@@ -15,6 +18,18 @@ WinBeatifyPhoto::WinBeatifyPhoto(QWidget *parent) :
 WinBeatifyPhoto::~WinBeatifyPhoto()
 {
     delete ui;
+}
+
+/*reopen this win*/
+void WinBeatifyPhoto::on_gotoBeatifyPhoto_clicked_reshow(Mat SrcMat)
+{
+    matIn = SrcMat;
+    matCur = matIn.clone();
+    CHECK(QtCv.cvMat2QImage(matIn, QImgIn));
+    CHECK(QtCv.cvMat2QImage(matCur, QImgOut));
+    ui->LbInputImage->setPixmap(QPixmap::fromImage(QImgIn));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(QImgOut));
+    this->show();
 }
 
 /*SpinBox Init*/
@@ -29,8 +44,9 @@ void WinBeatifyPhoto::SpinBoxInit()
     ui->SbFuzzy->setRange(1,99);
     ui->SbFuzzy->setSingleStep(2);
 
-    ui->SbFilter->setRange(1,99);
-    ui->SbFilter->setSingleStep(2);
+    ui->SbBinarization->setRange(0,255);
+    ui->SbBinarization->setSingleStep(1);
+    ui->SbBinarization->setValue(128);
 
     ui->SbSharpen->setRange(1,99);
     ui->SbSharpen->setSingleStep(2);
@@ -61,11 +77,24 @@ void WinBeatifyPhoto::VectorSliderInit()
     ui->VsSaturation->setSliderPosition(100);
 }
 
+/*Temprory save mat Init, used for pubotton "Last" and "Next"*/
+void WinBeatifyPhoto::TempSavematInit()
+{
+    /*Init last TempSavemat*/
+    TempSavemat_pos_last = 0;
+    TempSavemat_last = new DoubleLq_S;
+    TempSavemat_last->DoubleLqInit(&TempSavemat_last, matCur);
+
+    /*Init next TempSavemat*/
+    TempSavemat_pos_next = 0; /*current pic pos*/
+    TempSavemat_next = new DoubleLq_S;
+    TempSavemat_next->DoubleLqInit(&TempSavemat_next, matCur);
+}
+
 /*Win init*/
 void WinBeatifyPhoto::WinInit()
 {
     /*Init Class variable*/
-    matPreKey = 0;
 
     /*init SpinBox*/
     SpinBoxInit();
@@ -91,7 +120,9 @@ void WinBeatifyPhoto::WinInit()
         ui->LbInputImage->setPixmap(QPixmap::fromImage(QImgIn));
         ui->LbOutputImage->setPixmap(QPixmap::fromImage(QImgOut));
     }
+    TempSavematInit();
 }
+
 
 /*Open Image*/
 void WinBeatifyPhoto::on_PbOpenFile_clicked()
@@ -111,27 +142,128 @@ void WinBeatifyPhoto::on_PbBackToMain_clicked()
     this->close();
 }
 
+/*go to winAiPhoto*/
+void WinBeatifyPhoto::on_PbWinAiPhoto_clicked()
+{
+    emit WinAiDisplay(matCur);
+    this->close();
+}
+
 /*PushBotton Last*/
 void WinBeatifyPhoto::on_PbLast_clicked()
 {
-    if(matPreKey > 0)
+    int i = 1;
+    QImage qimg;
+    pDoubleLq_S temp = TempSavemat_last;
+
+    /*judge if has steps save*/
+    if(TempSavemat_pos_last > 0)
     {
-        matCur = matPre[matPreKey].clone();
-        matPreKey -= 1;
+        while(i < TempSavemat_pos_last)
+        {
+            temp = temp->pNext;
+            i += 1;
+        }
+        TempSavemat_pos_last -= 1;
+
+        /*show picture*/
+        matCur = (temp->mat).clone();
+        CHECK(QtCv.cvMat2QImage(matCur, qimg));
+        ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
+
+        /*save the tempority value into next*/
+        if(temp->pNext == NULL)
+        {
+           ui->TbHint->setText(QString::fromStdString("no more steps to last!"));
+        }
+        else
+        {
+            TempSavemat_next->DoubleLqAddNode(TempSavemat_next, temp->pNext->mat);
+            TempSavemat_pos_next += 1;
+        }
+
+        /*delete last mat in TempSavemat_last*/
+        TempSavemat_last->DoubleLqDeletRearNode(TempSavemat_last);
+    }
+    else
+    {
+        ui->TbHint->setText(QString::fromStdString("no more steps to last!"));
     }
 }
 
-/*Confirm This Step*/
-void WinBeatifyPhoto::on_PbConfirm_clicked()
+/*PushBotton Next*/
+void WinBeatifyPhoto::on_PbNext_clicked()
 {
-    matCur = ImageBasic.matOut;
-    if(matPreKey<10)
+    int i = 1;
+    QImage qimg;
+    pDoubleLq_S temp = TempSavemat_next;
+
+    /*judge if has steps save*/
+    if(TempSavemat_pos_next > 0)
     {
-        matPre[matPreKey] = matCur.clone();
-        ui->TbHint->setText(QString::fromStdString("save this step success!"));
+        while(i < TempSavemat_pos_next+1)
+        {
+            temp = temp->pNext;
+            i += 1;
+        }
+
+        TempSavemat_pos_next -= 1;
+
+        /*show picture*/
+        matCur = (temp->mat).clone();
+        CHECK(QtCv.cvMat2QImage(matCur, qimg));
+        ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
+
+        /*save the tempority value into next*/
+        TempSavemat_last->DoubleLqAddNode(TempSavemat_last, matCur);
+        TempSavemat_pos_last += 1;
+
+        /*delete last mat in TempSavemat_last*/
+        TempSavemat_next->DoubleLqDeletRearNode(TempSavemat_next);
     }
     else
-    {}
+    {
+        ui->TbHint->setText(QString::fromStdString("no more steps to next!"));
+    }
+}
+
+/*PushBotton Confirm*/
+void WinBeatifyPhoto::on_PbConfirm_clicked()
+{
+    int flag;
+    Mat matLast;
+    //QtCv.CompareMat(matCur, TempSavemat_last->mat, flag); /*compare current mat with origin mat*/
+    if(!ImageBasic.matOut.empty())
+    {
+        TempSavemat_last->DoubleLqGetLast(TempSavemat_last,matLast); /*Get last mat*/
+        matCur = ImageBasic.matOut;  /*get current matCur*/
+        QtCv.CompareMat(matCur, matLast, flag); /*compare current mat with last save mat*/
+
+        if(flag) /*if mat changed*/
+        {
+            if(TempSavemat_pos_last < MaxTempSaveNum)
+            {
+                TempSavemat_last->DoubleLqAddNode(TempSavemat_last, matCur);
+                TempSavemat_pos_last += 1;
+                ui->TbHint->setText(QString::fromStdString("save success!"));
+            }
+            else
+            {
+                TempSavemat_last->DoubleLqDelet2ndNode(TempSavemat_last);
+                TempSavemat_last->DoubleLqAddNode(TempSavemat_last, matCur);
+                ui->TbHint->setText(QString::fromStdString("save success!"));
+            }
+        }
+        else  /*if mat unchanged*/
+        {
+            ui->TbHint->setText(QString::fromStdString("no change need to be save"));
+        }
+    }
+    else
+    {
+        ui->TbHint->setText(QString::fromStdString("no change need to be save33333"));
+    }
+
 
 }
 
@@ -152,11 +284,16 @@ void WinBeatifyPhoto::on_PbSaveFile_clicked()
     , please choose this storage root and putting the image name"));
 }
 
+/****************************************************************************************file open close end*/
+
+/****************************************************************************************image process start*/
+
 /*Biarization*/
 void WinBeatifyPhoto::on_PbBiarization_clicked()
 {
     QImage qimg;
-    CHECK(ImageBasic.ImageBinary(matCur,qimg));
+    uint32 BinaryThrehold = ui->SbBinarization->value();
+    CHECK(ImageBasic.ImageBinary(matCur, qimg, BinaryThrehold));
     ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
 }
 
@@ -298,3 +435,7 @@ void WinBeatifyPhoto::on_PbExpand_clicked()
     CHECK(ImageBasic.ImageExpand(matCur, qimg, FilterSize));
     ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
 }
+
+
+
+

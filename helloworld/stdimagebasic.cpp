@@ -9,12 +9,12 @@ stdImageBasic::stdImageBasic()
 
 }
 
-unsigned int stdImageBasic::ImageBinary(Mat matIn, QImage& QImgOut)
+unsigned int stdImageBasic::ImageBinary(Mat matIn, QImage& QImgOut, uint32 BinaryThrehold)
 {
      Mat matOutTemp;
 
      CHECK_CODE(QtCv.CreatTempMat(matIn, matOutTemp), ERROR_CODE_0);
-     CHECK_CODE(QtCv.BinaryTransform(matIn,matOutTemp), ERROR_CODE_1); /*init Filter*/
+     CHECK_CODE(QtCv.BinaryTransform(matIn, matOutTemp, BinaryThrehold), ERROR_CODE_1); /*init Filter*/
      CHECK_CODE(QtCv.cvMat2QImage(matOutTemp, QImgOut), ERROR_CODE_2);/*convert mat into qimage*/
 
      matOut = matOutTemp.clone();

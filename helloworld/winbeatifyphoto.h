@@ -7,8 +7,11 @@
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
 
+#include "datast.h"
 #include "stdqtcvfile.h"
 #include "stdimagebasic.h"
+
+#define MaxTempSaveNum 10
 
 namespace Ui {
 class WinBeatifyPhoto;
@@ -23,18 +26,28 @@ public:
     QImage QImgIn;
     bool PhotoFlag;
 
+    /*Init SpinBox*/
     void SpinBoxInit();
+    /*Init Vector*/
     void VectorSliderInit();
+    /*Init Win*/
     void WinInit();
+    /*Init TempSavemat*/
+    void TempSavematInit();
 
 public:
     explicit WinBeatifyPhoto(QWidget *parent = 0);
     ~WinBeatifyPhoto();
 
 signals:
+    /*emit signal to back to mainwind*/
     void WinDisplay();
+    /*emit signal to go to winAi*/
+    void WinAiDisplay(Mat matCur);
 
 private slots:
+    void on_gotoBeatifyPhoto_clicked_reshow(Mat matSrc);
+
     void on_PbBackToMain_clicked();
 
     void on_PbLast_clicked();
@@ -75,26 +88,28 @@ private slots:
 
     void on_PbLaplaceShape_clicked();
 
-
-
     void on_PbShapen_clicked();
 
     void on_PbCorrosion_clicked();
 
     void on_PbExpand_clicked();
 
+    void on_PbWinAiPhoto_clicked();
+
+    void on_PbNext_clicked();
+
 private:
     Ui::WinBeatifyPhoto *ui;
     QtCvFile QtCv;
     stdImageBasic ImageBasic;
 
-    QImage QImgOut;
-    Mat matPre[10];
-    uint32 matPreKey;
-    Mat matCur;
-    Mat matNext[10];
-    uint32 matNextKey;
+    QImage QImgOut;/*current Qimg show in right*/
+    Mat matCur; /*current mat show in right*/
 
+    pDoubleLq_S TempSavemat_last; /*last mat show in right stroge*/
+    pDoubleLq_S TempSavemat_next; /*next mat show in next stroge*/
+    int TempSavemat_pos_last;  /*last mat position*/
+    int TempSavemat_pos_next;  /*next mat position*/
 };
 
 #endif // WINBEATIFYPHOTO_H

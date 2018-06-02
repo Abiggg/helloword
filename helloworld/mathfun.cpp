@@ -5,9 +5,9 @@
 MathFun::MathFun()
 {
 }
-int MathFun::Binary(int x)
+int MathFun::Binary(int x, uint32 Binarythresholds)
 {
-    if( x<=122)
+    if( x<=(int)Binarythresholds)
     {
         return 0;
     }
@@ -152,6 +152,7 @@ unsigned int MathFun::CountRgbMaxMin(Mat MatIn, unsigned char RgbMax[], unsigned
     return OK;
 }
 
+/*Count classical style*/
 unsigned int MathFun::CoutClassical(uint32 RgbSrc[], uint32 RgbDst[])
 {
     RgbDst[0] = (uint32)(0.272*(float)RgbSrc[2] + 0.534*(float)RgbSrc[1] + 0.131*(float)RgbSrc[0]);
@@ -160,3 +161,108 @@ unsigned int MathFun::CoutClassical(uint32 RgbSrc[], uint32 RgbDst[])
     return OK;
 }
 
+unsigned int MathFun::CountRatationSize(Mat matIn, float radian, unsigned int width, unsigned int height)
+{
+    int SrcRows = matIn.rows;  /*height*/
+    int SrcCols = matIn.cols;  /*width*/
+
+    CoordinateXY_S SrcXY0, SrcXY1, SrcXY2, SrcXY3;
+    CoordinateXY_S DstXY0, DstXY1, DstXY2, DstXY3;
+    /*
+      (x1,y1) | (x0,y0)     (x1,y1) | (x0,y0)     x = x0*cos(angel) - y0*sin(angle)
+     ------------------- = -------------------
+      (x2,y2) | (x3,y3)     (x2,y2) | (x3,y3)     y = x0*sin(angle) + y0*cos(angle)
+    */
+    SrcXY0.y = SrcRows/2;
+    SrcXY0.x = SrcCols/2;
+    SrcXY1.y = SrcRows/2;
+    SrcXY1.x = -SrcCols/2;
+    SrcXY2.y = -SrcRows/2;
+    SrcXY2.x = -SrcCols/2;
+    SrcXY3.y = -SrcRows/2;
+    SrcXY3.x = SrcCols/2;
+
+    DstXY0.x = SrcXY0.x * cos(radian) - SrcXY0.y*sin(radian);
+    DstXY0.y = SrcXY0.x * sin(radian) + SrcXY0.y*sin(radian);
+    DstXY1.x = SrcXY1.x * cos(radian) - SrcXY1.y*sin(radian);
+    DstXY1.y = SrcXY1.x * sin(radian) + SrcXY1.y*sin(radian);
+    DstXY2.x = SrcXY2.x * cos(radian) - SrcXY2.y*sin(radian);
+    DstXY2.y = SrcXY2.x * sin(radian) + SrcXY2.y*sin(radian);
+    DstXY3.x = SrcXY3.x * cos(radian) - SrcXY3.y*sin(radian);
+    DstXY3.y = SrcXY3.x * sin(radian) + SrcXY3.y*sin(radian);
+
+    width = MAXVALUE(abs(DstXY0.x - DstXY2.x),abs(DstXY1.x - DstXY3.x));
+    height = MAXVALUE(abs(DstXY0.y - DstXY2.y),abs(DstXY1.y - DstXY3.y));
+
+    return OK;
+}
+
+/*init FFT filter*/
+unsigned int MathFun::initFFT(Mat MatIn, Mat &InitMat)
+{
+    int i = 0;
+    int j = 0;
+    int chl = 0;
+    for(chl=0;chl<MatIn.channels();chl++)
+    {
+        for(i=0;i<MatIn.rows;i++)
+        {
+            for(j=0;j<MatIn.cols;j++)
+            {
+                InitMat.at<Vec3f>(i,j*2)[chl] =(float) MatIn.at<Vec3b>(i,j)[chl];
+                InitMat.at<Vec3f>(i,j*2+1)[chl] =(float) MatIn.at<Vec3b>(i,j)[chl] * (-1);
+            }
+        }
+    }
+    return OK;
+}
+
+/*fft transform*/
+unsigned int MathFun::fftFun(Mat InitMat, Mat &fftMat)
+{
+    int i = 0;
+    int j = 0;
+    int m = 0;
+    int n = 0;
+    int height = InitMat.rows;
+    int width = InitMat.cols;
+    double angle;
+
+    for(i=0;i<InitMat.rows;i++)
+    {
+        for(j=0;InitMat.cols/2;j++)
+        {
+            for(m=0;m<height;m++)
+            {
+                for(n=0;n<width;n++)
+                {
+                    angle = 2*PI*((double)i*m/width + (double)j*n/height);
+                    fftMat.at<Vec3f>(i,2*j) += InitMat.at<Vec3f>(i,j) * cos(angle);
+                    fftMat.at<Vec3f>(i,2*j+1) += InitMat.at<Vec3f>(i,j) * sin(angle);
+                }
+            }
+        }
+    }
+    return OK;
+}
+#if 0
+unsigned int MathFun::fftSpectrum(Mat fftMat, Mat &fftSpecMat)
+{
+    int i = 0;
+    int j = 0;
+    double norm;
+
+    for(i=0;i<fftMat.rows;i++)
+    {
+        for(j=0;fftMat.cols;j++)
+        {
+            norm = (double)fftMat.at<Vec3f>(i,2*j);
+        }
+    }
+    return OK;
+}
+#endif
+
+
+
+/**/

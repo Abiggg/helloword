@@ -10,6 +10,8 @@
 #include <opencv2/videoio.hpp>
 
 #include "stdqtcvfile.h"
+#include "winbeatifyphoto.h"
+#include "winaiphoto.h"
 
 using namespace cv;
 using namespace std;
@@ -32,14 +34,16 @@ public:
 public:
     Mat srcMat;
     QImage srcQImg;
+    WinBeatifyPhoto *BeatifyPhoto;
+    winAiPhoto *AiPhoto;//新建子界面
 
 private slots:
     void reshow();
     void on_PbPhotoGraph_clicked();
 
-    void on_PbImageTransform_3_clicked();
+    void on_PbBeautifyPhoto_clicked();
 
-    void on_PbImageMorphology_clicked();
+    void on_PbAiPhoto_clicked();
 
 private:
     Ui::MainWindow *ui;

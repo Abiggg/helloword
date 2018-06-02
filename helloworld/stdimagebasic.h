@@ -19,7 +19,7 @@ class stdImageBasic : public QWidget
 
 public:
     stdImageBasic();
-     uint32 ImageBinary(Mat matIn, QImage& QImgOut);
+     uint32 ImageBinary(Mat matIn, QImage& QImgOut, uint32 BinaryThrehold);
      uint32 ImageGrayscal(Mat matIn, QImage& QImgOut);
      uint32 ImageEquration(Mat matIn, QImage& QImgOut);
      uint32 ImageYminor(Mat matIn, QImage& QImgOut);

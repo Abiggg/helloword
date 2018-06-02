@@ -13,6 +13,11 @@ using namespace std;
 #include "stddatatype.h"
 #include "math.h"
 
+typedef struct CoordinateXY
+{
+    int x;
+    int y;
+}CoordinateXY_S;
 
 class MathFun
 {
@@ -22,7 +27,7 @@ public:
 public:
 
     /*binary function*/
-    int Binary(int x);
+    int Binary(int x, uint32 Binarythreshold);
 
     int DataTranstrom(float x);
 
@@ -40,6 +45,13 @@ public:
 
     uint32 CoutClassical(uint32 RgbSrc[3],uint32 RgbDst[3]);
 
+    /*ratation fun*/
+    uint32 CountRatationSize(Mat matIn, float radian, uint32 width, uint32 height);
+
+    /*init FFT*/
+    uint32 initFFT(Mat MatIn, Mat& InitMat);
+    uint32 fftFun(Mat InitMat, Mat &fftMat);
+    uint32 fftSpectrum(Mat fftMat, Mat &fftSpecMat);
 
     /*pix limit*/
     int PixLimit(int x);
@@ -48,5 +60,6 @@ private:
 protected:
 
 };
+
 
 #endif // MATHFUN_H

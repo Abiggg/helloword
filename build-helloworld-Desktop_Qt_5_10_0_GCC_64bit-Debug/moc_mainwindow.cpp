@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[6];
-    char stringdata0[102];
+    char stringdata0[91];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,13 +35,13 @@ QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 6), // "reshow"
 QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 23), // "on_PbPhotoGraph_clicked"
-QT_MOC_LITERAL(4, 43, 29), // "on_PbImageTransform_3_clicked"
-QT_MOC_LITERAL(5, 73, 28) // "on_PbImageMorphology_clicked"
+QT_MOC_LITERAL(4, 43, 26), // "on_PbBeautifyPhoto_clicked"
+QT_MOC_LITERAL(5, 70, 20) // "on_PbAiPhoto_clicked"
 
     },
     "MainWindow\0reshow\0\0on_PbPhotoGraph_clicked\0"
-    "on_PbImageTransform_3_clicked\0"
-    "on_PbImageMorphology_clicked"
+    "on_PbBeautifyPhoto_clicked\0"
+    "on_PbAiPhoto_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,8 +81,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->reshow(); break;
         case 1: _t->on_PbPhotoGraph_clicked(); break;
-        case 2: _t->on_PbImageTransform_3_clicked(); break;
-        case 3: _t->on_PbImageMorphology_clicked(); break;
+        case 2: _t->on_PbBeautifyPhoto_clicked(); break;
+        case 3: _t->on_PbAiPhoto_clicked(); break;
         default: ;
         }
     }
