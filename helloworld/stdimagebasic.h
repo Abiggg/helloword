@@ -24,6 +24,7 @@ public:
      uint32 ImageEquration(Mat matIn, QImage& QImgOut);
      uint32 ImageYminor(Mat matIn, QImage& QImgOut);
      uint32 ImageXminor(Mat matIn, QImage& QImgOut);
+     uint32 ImageRatation(Mat matIn, QImage& QImgOut, int angle);
      uint32 ImageFuzzyAverage(Mat matIn, QImage& QImgOut, uint8 FilterSize);
      uint32 ImageGaussian(Mat matIn, QImage& QImgOut, uint8 FilterSize);
      uint32 ImageScalar(Mat matIn, QImage& QImgOut, uint8 FilterSize);
@@ -36,6 +37,10 @@ public:
      uint32 ImageOilPaint(Mat matIn, QImage& QImgOut, uint32 FilterSize);
      uint32 ImageCorrosion(Mat matIn, QImage& QImgOut, uint32 FilterSize);
      uint32 ImageExpand(Mat matIn, QImage& QImgOut, uint32 FilterSize);
+     uint32 ImageFFtHighPass(Mat matIn, QImage& QImgOut);
+     uint32 ImageCvFFtLowPass(Mat matIn, QImage& QImgOut, int CutOff);
+     uint32 ImageCvFFtHighPass(Mat matIn, QImage& QImgOut, int CutOff);
+     uint32 ImageCvFFtBandPass(Mat matIn, QImage& QImgOut, int CutOff0, int CutOff1);
 public:
      Mat matOut;
 private:

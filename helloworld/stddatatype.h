@@ -40,11 +40,15 @@
          return ((x<<4) | code); \
     }
 
+/*maxmum*/
 #define MAXVALUE(x,y) \
     (x>y?x:y);
 
+/*minnum*/
 #define MINVALUE(x,y) \
     (x<y?x:y)
+
+#define RADIAN(x) (x * 3.14 / 180)
 
 typedef enum ERROR_CODE
 {

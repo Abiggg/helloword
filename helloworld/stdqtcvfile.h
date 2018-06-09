@@ -44,6 +44,11 @@ class QtCvFile : public QWidget
         uint32 BrightTransform(Mat InputMat, Mat& OutputMat, uint32 RatioBrightness);
         uint32 ConstrastTransform(Mat InputMat, Mat& OutputMat, uint32 RatioConstrast);
         uint32 SaturationTransform(Mat InputMat, Mat& OutputMat, uint32 RatioSaturation);
+        uint32 NearInterTransform(Mat InputMat, Mat& OutputMat);
+        uint32 fftTransform(Mat InputMat, Mat& OutputMat);
+        uint32 cvDFtLowTransform(Mat InputMat, Mat& OutputMat, int CutOff);
+        uint32 cvDFtHighTransform(Mat InputMat, Mat& OutputMat, int CutOff);
+        uint32 cvDFtBandTransform(Mat InputMat, Mat& OutputMat, int CutOff0, int CutOff1);
 
         uint32 ShapenTransform(Mat InputMat, Mat &OutputMat, Mat Filter, unsigned int RatioShapen);
         uint32 CorrosionTransform(Mat InputMat, Mat &OutputMat, int FilterSize);

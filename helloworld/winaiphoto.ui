@@ -45,7 +45,7 @@
      <x>610</x>
      <y>30</y>
      <width>541</width>
-     <height>421</height>
+     <height>401</height>
     </rect>
    </property>
    <property name="frameShadow">
@@ -64,7 +64,7 @@
      <x>20</x>
      <y>30</y>
      <width>561</width>
-     <height>421</height>
+     <height>401</height>
     </rect>
    </property>
    <property name="text">
@@ -75,7 +75,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>650</y>
+     <y>630</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -88,7 +88,7 @@
    <property name="geometry">
     <rect>
      <x>1070</x>
-     <y>570</y>
+     <y>550</y>
      <width>100</width>
      <height>81</height>
     </rect>
@@ -101,7 +101,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>590</y>
+     <y>570</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -113,8 +113,8 @@
   <widget class="QPushButton" name="PbWinBeatify">
    <property name="geometry">
     <rect>
-     <x>1070</x>
-     <y>660</y>
+     <x>180</x>
+     <y>650</y>
      <width>100</width>
      <height>81</height>
     </rect>
@@ -127,7 +127,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>530</y>
+     <y>510</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -140,7 +140,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>770</y>
+     <y>780</y>
      <width>41</width>
      <height>31</height>
     </rect>
@@ -153,7 +153,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>470</y>
+     <y>450</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -165,9 +165,9 @@
   <widget class="QTextBrowser" name="TbHint">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>770</y>
-     <width>1101</width>
+     <x>90</x>
+     <y>780</y>
+     <width>1081</width>
      <height>31</height>
     </rect>
    </property>
@@ -176,7 +176,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>710</y>
+     <y>690</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -189,7 +189,7 @@
    <property name="geometry">
     <rect>
      <x>1070</x>
-     <y>470</y>
+     <y>450</y>
      <width>100</width>
      <height>91</height>
     </rect>
@@ -197,6 +197,281 @@
    <property name="text">
     <string>Confirm</string>
    </property>
+  </widget>
+  <widget class="QProgressBar" name="PgFinishPercent">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>750</y>
+     <width>1081</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>24</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>750</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Percent:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbStratTrain">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>450</y>
+     <width>100</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>StratTrain</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PbEndTrain">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>550</y>
+     <width>100</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>EndTrain</string>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="SwAiFun">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>450</y>
+     <width>611</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>4</number>
+   </property>
+   <widget class="QWidget" name="SwpKnn">
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>KNN</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="SwpBpSvm">
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SVM</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="SwpDecisionTree">
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>DecisionTree</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="SwpBayes">
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bayes</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="SwpBpNetWork">
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>BpNet</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PbBpStart">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="SwpCnnLet">
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cnn</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="SwpRnn">
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Rnn</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QListWidget" name="LwAiFun">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>450</y>
+     <width>151</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <item>
+    <property name="text">
+     <string>KnnAlgorithm</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SvmAlgoritm</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DecisionTree</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>BayesAlgoritm</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>BpNetwork</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>CnnLenet5</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Rnn-Lstm</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Symbola</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>

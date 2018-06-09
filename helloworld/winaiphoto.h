@@ -3,12 +3,14 @@
 
 #include <QWidget>
 #include <iostream>
+#include <QString>
 #include<opencv2/core/core.hpp>
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
 
 #include "stdqtcvfile.h"
 #include "stdimagebasic.h"
+#include "threadfromqthread.h"
 
 namespace Ui {
 class winAiPhoto;
@@ -28,14 +30,20 @@ public:
     bool PhotoFlag;
 
 public:
+    void WinProgressBarInit(); /*Progress Bar Finish Percent*/
+    void AiThreadInit();
+    void StackWidgetInit();
     void winAiPhotoInit();
+
 
 signals:
     void WinDisplay();
     void WinBeatifyDisplay(Mat matCur);
 
 private slots:
-    void on_gotoAiPhoto_clicked_reshow(Mat SrcMat);
+    void gotoAiPhoto_clicked_reshow(Mat SrcMat);
+
+    void ReceiveMessage(int count);
 
     void on_PbBackToMain_clicked();
 
@@ -45,13 +53,23 @@ private slots:
 
     void on_PbSaveFile_clicked();
 
+    void on_PbStratTrain_clicked();
+
+    void on_PbEndTrain_clicked();
+
+    void on_LwAiFun_currentRowChanged(int currentRow);
+
+    void on_PbBpStart_clicked();
+
 private:
     Ui::winAiPhoto *ui;
+    ThreadFromQthread *AiThread;
 
     QtCvFile QtCv;
     stdImageBasic ImageBasic;
     QImage QImgOut;
     Mat matCur;
+
 };
 
 #endif // WINAIPHOTO_H

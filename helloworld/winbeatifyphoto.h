@@ -46,7 +46,7 @@ signals:
     void WinAiDisplay(Mat matCur);
 
 private slots:
-    void on_gotoBeatifyPhoto_clicked_reshow(Mat matSrc);
+    void gotoBeatifyPhoto_clicked_reshow(Mat matSrc);
 
     void on_PbBackToMain_clicked();
 
@@ -97,6 +97,14 @@ private slots:
     void on_PbWinAiPhoto_clicked();
 
     void on_PbNext_clicked();
+
+    void on_PbRatation_clicked();
+
+    void on_PbFFtBandFilter_clicked();
+
+    void on_PbFFtLowFilter_clicked();
+
+    void on_PbFFtHighFilter_clicked();
 
 private:
     Ui::WinBeatifyPhoto *ui;

@@ -21,7 +21,7 @@ WinBeatifyPhoto::~WinBeatifyPhoto()
 }
 
 /*reopen this win*/
-void WinBeatifyPhoto::on_gotoBeatifyPhoto_clicked_reshow(Mat SrcMat)
+void WinBeatifyPhoto::gotoBeatifyPhoto_clicked_reshow(Mat SrcMat)
 {
     matIn = SrcMat;
     matCur = matIn.clone();
@@ -30,6 +30,16 @@ void WinBeatifyPhoto::on_gotoBeatifyPhoto_clicked_reshow(Mat SrcMat)
     ui->LbInputImage->setPixmap(QPixmap::fromImage(QImgIn));
     ui->LbOutputImage->setPixmap(QPixmap::fromImage(QImgOut));
     this->show();
+
+    /*Init other things*/
+    /*init SpinBox*/
+    SpinBoxInit();
+
+    /*Slider Init*/
+    VectorSliderInit();
+
+    /*TempSavemat init*/
+    TempSavematInit();
 }
 
 /*SpinBox Init*/
@@ -62,6 +72,19 @@ void WinBeatifyPhoto::SpinBoxInit()
 
     ui->SbOilPaint->setRange(3,255);
     ui->SbOilPaint->setSingleStep(2);
+
+    ui->SbFFtLowFilter->setRange(1,255);
+    ui->SbFFtLowFilter->setSingleStep(1);
+
+    ui->SbFFtHighFilter->setRange(1,255);
+    ui->SbFFtHighFilter->setSingleStep(1);
+    ui->SbFFtHighFilter->setValue(100);
+
+    ui->SbFFtBandFilter0->setRange(1,255);
+    ui->SbFFtBandFilter0->setSingleStep(1);
+    ui->SbFFtBandFilter1->setRange(1,255);
+    ui->SbFFtBandFilter1->setSingleStep(1);
+    ui->SbFFtBandFilter1->setValue(50);
 }
 
 /*Vector Slider init*/
@@ -120,6 +143,7 @@ void WinBeatifyPhoto::WinInit()
         ui->LbInputImage->setPixmap(QPixmap::fromImage(QImgIn));
         ui->LbOutputImage->setPixmap(QPixmap::fromImage(QImgOut));
     }
+    /*TempSavemat init*/
     TempSavematInit();
 }
 
@@ -436,6 +460,39 @@ void WinBeatifyPhoto::on_PbExpand_clicked()
     ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
 }
 
+/*Ratation Transform*/
+void WinBeatifyPhoto::on_PbRatation_clicked()
+{
+    QImage qimg;
+    uint8 angle = (uint8) ui->SbRatation->value();
+    CHECK(ImageBasic.ImageRatation(matCur, qimg, angle));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
+}
 
+/*FFT Band Filter */
+void WinBeatifyPhoto::on_PbFFtBandFilter_clicked()
+{
+    QImage qimg;
+    int CutOff0 = ui->SbFFtBandFilter0->value();
+    int CutOff1 = ui->SbFFtBandFilter1->value();
+    CHECK(ImageBasic.ImageCvFFtBandPass(matCur, qimg, CutOff0, CutOff1));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
+}
 
+/*FFT low FILTER*/
+void WinBeatifyPhoto::on_PbFFtLowFilter_clicked()
+{
+    QImage qimg;
+    int CutOff = ui->SbFFtLowFilter->value();
+    CHECK(ImageBasic.ImageCvFFtLowPass(matCur, qimg, CutOff));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
+}
 
+/*FFT High FILTER*/
+void WinBeatifyPhoto::on_PbFFtHighFilter_clicked()
+{
+    QImage qimg;
+    int CutOff = ui->SbFFtHighFilter->value();
+    CHECK(ImageBasic.ImageCvFFtHighPass(matCur, qimg, CutOff));
+    ui->LbOutputImage->setPixmap(QPixmap::fromImage(qimg));
+}

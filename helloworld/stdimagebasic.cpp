@@ -71,6 +71,20 @@ unsigned int stdImageBasic::ImageXminor(Mat matIn, QImage &QImgOut)
     return OK;
 }
 
+unsigned int stdImageBasic::ImageRatation(Mat matIn, QImage &QImgOut, int angle)
+{
+    Mat matOutTemp;
+    Mat matOutTemp2;
+    CHECK_CODE(QtCv.RatationTransform(matIn, matOutTemp, angle), ERROR_CODE_0);
+    CHECK_CODE(QtCv.CreatTempMat(matOutTemp, matOutTemp2), ERROR_CODE_1);
+    CHECK_CODE(QtCv.NearInterTransform(matOutTemp, matOutTemp2), ERROR_CODE_2);
+    CHECK_CODE(QtCv.cvMat2QImage(matOutTemp2, QImgOut), ERROR_CODE_3);/*convert mat into qimage*/
+
+    matOut = matOutTemp2.clone();
+    return OK;
+
+}
+
 uint32 stdImageBasic::ImageFuzzyAverage(Mat matIn, QImage& QImgOut, uint8 FilterSize)
 {
     uint32 sum[3] = {0};
@@ -217,6 +231,47 @@ unsigned int stdImageBasic::ImageExpand(Mat matIn, QImage &QImgOut, unsigned int
     Mat matOutTemp;
     CHECK_CODE(QtCv.CreatTempMat(matIn, matOutTemp), ERROR_CODE_0);
     CHECK_CODE(QtCv.ExpandTransform(matIn, matOutTemp, FilterSize), ERROR_CODE_1);
+    CHECK_CODE(QtCv.cvMat2QImage(matOutTemp, QImgOut), ERROR_CODE_2);/*convert mat into qimage*/
+
+    matOut = matOutTemp.clone();
+    return OK;
+}
+
+unsigned int stdImageBasic::ImageFFtHighPass(Mat matIn, QImage &QImgOut)
+{
+    Mat matOutTemp;
+    CHECK_CODE(QtCv.fftTransform(matIn, matOutTemp), ERROR_CODE_1);
+    CHECK_CODE(QtCv.cvMat2QImage(matOutTemp, QImgOut), ERROR_CODE_2);/*convert mat into qimage*/
+
+    matOut = matOutTemp.clone();
+    return OK;
+}
+
+unsigned int stdImageBasic::ImageCvFFtLowPass(Mat matIn, QImage &QImgOut ,int CutOff)
+{
+    Mat matOutTemp;
+    CHECK_CODE(QtCv.cvDFtLowTransform(matIn, matOutTemp, CutOff), ERROR_CODE_1);
+    CHECK_CODE(QtCv.cvMat2QImage(matOutTemp, QImgOut), ERROR_CODE_2);/*convert mat into qimage*/
+
+    matOut = matOutTemp.clone();
+    return OK;
+}
+
+unsigned int stdImageBasic::ImageCvFFtHighPass(Mat matIn, QImage &QImgOut, int CutOff)
+{
+    Mat matOutTemp;
+    CHECK_CODE(QtCv.cvDFtHighTransform(matIn, matOutTemp, CutOff), ERROR_CODE_1);
+    CHECK_CODE(QtCv.cvMat2QImage(matOutTemp, QImgOut), ERROR_CODE_2);/*convert mat into qimage*/
+
+    matOut = matOutTemp.clone();
+    return OK;
+}
+
+/*FFt Band Filter*/
+unsigned int stdImageBasic::ImageCvFFtBandPass(Mat matIn, QImage &QImgOut, int CutOff0, int CutOff1)
+{
+    Mat matOutTemp;
+    CHECK_CODE(QtCv.cvDFtBandTransform(matIn, matOutTemp, CutOff0, CutOff1), ERROR_CODE_1);
     CHECK_CODE(QtCv.cvMat2QImage(matOutTemp, QImgOut), ERROR_CODE_2);/*convert mat into qimage*/
 
     matOut = matOutTemp.clone();

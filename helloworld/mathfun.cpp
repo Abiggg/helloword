@@ -1,6 +1,6 @@
 #include "mathfun.h"
 #include "math.h"
-
+#include <iostream>
 
 MathFun::MathFun()
 {
@@ -40,6 +40,25 @@ float MathFun::GaussianFun(int x, int y, uint8 FilterSize, float sigma)
     float gaussian_temp;
     gaussian_temp = exp(-(pow(x-FilterSize/2,2)+pow(y-FilterSize/2,2))/(2*pow(sigma,2)))/(2*PI*pow(sigma,2));
     return gaussian_temp;
+}
+
+float MathFun::GaussianFilterFun(int x, int y, int centerX, int centerY, int CutOff)
+{
+    float temp;
+    float d;
+    float d0;
+    d = pow((x - centerX), 2.0) + pow((y - centerY), 2.0);
+    d0 = pow((CutOff - centerX), 2.0) + pow((CutOff - centerY), 2.0);
+    //temp = exp(-pow(d,2) / (pow(d0,2)));
+    if(d > d0)
+    {
+        temp = 0;
+    }
+    else
+    {
+        temp = 1;
+    }
+    return temp;
 }
 
 int MathFun::PixLimit(int x)
@@ -161,7 +180,16 @@ unsigned int MathFun::CoutClassical(uint32 RgbSrc[], uint32 RgbDst[])
     return OK;
 }
 
-unsigned int MathFun::CountRatationSize(Mat matIn, float radian, unsigned int width, unsigned int height)
+/*Coodinate ratation*/
+unsigned int MathFun::CoordinateRatation(CoordinateXY_S SrcXY, CoordinateXY_S& DstXY, float radian)
+{
+    DstXY.x = SrcXY.x * cos(radian) - SrcXY.y * sin(radian);
+    DstXY.y = SrcXY.x * sin(radian) + SrcXY.y * cos(radian);
+
+    return OK;
+}
+
+unsigned int MathFun::CountRatationSize(Mat matIn, float radian, unsigned int& width, unsigned int& height)
 {
     int SrcRows = matIn.rows;  /*height*/
     int SrcCols = matIn.cols;  /*width*/
@@ -173,23 +201,15 @@ unsigned int MathFun::CountRatationSize(Mat matIn, float radian, unsigned int wi
      ------------------- = -------------------
       (x2,y2) | (x3,y3)     (x2,y2) | (x3,y3)     y = x0*sin(angle) + y0*cos(angle)
     */
-    SrcXY0.y = SrcRows/2;
-    SrcXY0.x = SrcCols/2;
-    SrcXY1.y = SrcRows/2;
-    SrcXY1.x = -SrcCols/2;
-    SrcXY2.y = -SrcRows/2;
-    SrcXY2.x = -SrcCols/2;
-    SrcXY3.y = -SrcRows/2;
-    SrcXY3.x = SrcCols/2;
+    SrcXY0 = {SrcCols/2, SrcRows/2};
+    SrcXY1 = {-SrcCols/2, SrcRows/2};
+    SrcXY2 = {-SrcCols/2, -SrcRows/2};
+    SrcXY3 = {SrcCols/2, -SrcRows/2};
 
-    DstXY0.x = SrcXY0.x * cos(radian) - SrcXY0.y*sin(radian);
-    DstXY0.y = SrcXY0.x * sin(radian) + SrcXY0.y*sin(radian);
-    DstXY1.x = SrcXY1.x * cos(radian) - SrcXY1.y*sin(radian);
-    DstXY1.y = SrcXY1.x * sin(radian) + SrcXY1.y*sin(radian);
-    DstXY2.x = SrcXY2.x * cos(radian) - SrcXY2.y*sin(radian);
-    DstXY2.y = SrcXY2.x * sin(radian) + SrcXY2.y*sin(radian);
-    DstXY3.x = SrcXY3.x * cos(radian) - SrcXY3.y*sin(radian);
-    DstXY3.y = SrcXY3.x * sin(radian) + SrcXY3.y*sin(radian);
+    CoordinateRatation(SrcXY0, DstXY0, radian);
+    CoordinateRatation(SrcXY1, DstXY1, radian);
+    CoordinateRatation(SrcXY2, DstXY2, radian);
+    CoordinateRatation(SrcXY3, DstXY3, radian);
 
     width = MAXVALUE(abs(DstXY0.x - DstXY2.x),abs(DstXY1.x - DstXY3.x));
     height = MAXVALUE(abs(DstXY0.y - DstXY2.y),abs(DstXY1.y - DstXY3.y));
@@ -197,72 +217,83 @@ unsigned int MathFun::CountRatationSize(Mat matIn, float radian, unsigned int wi
     return OK;
 }
 
-/*init FFT filter*/
-unsigned int MathFun::initFFT(Mat MatIn, Mat &InitMat)
+Mat MathFun::initFFT2(Mat &src)
 {
-    int i = 0;
-    int j = 0;
-    int chl = 0;
-    for(chl=0;chl<MatIn.channels();chl++)
-    {
-        for(i=0;i<MatIn.rows;i++)
-        {
-            for(j=0;j<MatIn.cols;j++)
-            {
-                InitMat.at<Vec3f>(i,j*2)[chl] =(float) MatIn.at<Vec3b>(i,j)[chl];
-                InitMat.at<Vec3f>(i,j*2+1)[chl] =(float) MatIn.at<Vec3b>(i,j)[chl] * (-1);
-            }
+    Mat out = Mat::zeros(cvSize(src.cols, src.rows), CV_32FC1);
+    int i, j;
+
+    for(i=0;i<src.rows;i++){
+        float *ptr1 = out.ptr<float>(i);
+        uchar *ptr2 = src.ptr(i);
+        for(j=0;j<src.cols;j++){
+            ptr1[j] = ptr2[j];
         }
     }
-    return OK;
+
+    for(i=0;i<src.rows;i++){
+        float *ptr1 = out.ptr<float>(i);
+        for(j=0;j<src.cols;j++){
+            ptr1[j] = ptr1[j] * pow(-1,i+j);
+        }
+    }
+
+    return out;
 }
 
-/*fft transform*/
-unsigned int MathFun::fftFun(Mat InitMat, Mat &fftMat)
+void MathFun::FFT2(Mat &TD, Mat &FD)
 {
-    int i = 0;
-    int j = 0;
-    int m = 0;
-    int n = 0;
-    int height = InitMat.rows;
-    int width = InitMat.cols;
+    // 循环变量
+    int i, j, m ,n;
+    int width = TD.cols;
+    int height = TD.rows;
+    Mat tmpFd = Mat::zeros(cvSize(width, height), CV_32FC2);
+    double _2Pi = 2 * 3.1415926;
     double angle;
 
-    for(i=0;i<InitMat.rows;i++)
-    {
-        for(j=0;InitMat.cols/2;j++)
-        {
-            for(m=0;m<height;m++)
-            {
-                for(n=0;n<width;n++)
-                {
-                    angle = 2*PI*((double)i*m/width + (double)j*n/height);
-                    fftMat.at<Vec3f>(i,2*j) += InitMat.at<Vec3f>(i,j) * cos(angle);
-                    fftMat.at<Vec3f>(i,2*j+1) += InitMat.at<Vec3f>(i,j) * sin(angle);
+    //灰度
+    for(i=0;i<width;i++){
+        float *ptr1 = tmpFd.ptr<float>(i);
+        for(j=0;j<height;j++){
+            for(m=0;m<width;m++){
+                float *ptr2 = TD.ptr<float>(m);
+                for(n=0;n<height;n++){
+                    angle = _2Pi * ((double)i*m / width + (double)j*n/height);
+                    ptr1[j*2]   += ptr2[n] * cos(angle);
+                    ptr1[j*2+1] += ptr2[n] * sin(angle);
                 }
             }
         }
+        //printf("i:%d\n", i);
     }
-    return OK;
+    FD = tmpFd;
 }
-#if 0
-unsigned int MathFun::fftSpectrum(Mat fftMat, Mat &fftSpecMat)
+
+void MathFun::IFFT2(Mat &src, Mat &dst)
 {
-    int i = 0;
-    int j = 0;
-    double norm;
+    // 循环变量
+    int i, j, m ,n;
+    int width = src.cols;
+    int height = src.rows;
+    Mat tmpFd = Mat::zeros(cvSize(width, height), CV_32FC1);
+    double _2Pi = 2 * 3.1415926;
+    double angle;
 
-    for(i=0;i<fftMat.rows;i++)
-    {
-        for(j=0;fftMat.cols;j++)
-        {
-            norm = (double)fftMat.at<Vec3f>(i,2*j);
+    for(i=0;i<width;i++){
+        for(j=0;j<height;j++){
+            for(m=0;m<width;m++){
+                for(n=0;n<height;n++){
+                    angle = _2Pi * ((double)i*m / width + (double)j*n/height);
+                    tmpFd.at<float>(i,j) += src.at<float>(width-m,(height - n)*2) * cos(angle)
+                                - src.at<float>(width-m, (height-n)*2+1) * sin(angle);
+                }
+            }
+            tmpFd.at<uchar>(i, j) = tmpFd.at<float>(i, j) / width / height;
         }
+        //printf("i:%d\n", i);
     }
-    return OK;
+    dst = tmpFd;
 }
-#endif
 
 
 
-/**/
+

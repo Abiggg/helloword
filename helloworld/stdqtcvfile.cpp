@@ -364,12 +364,7 @@ unsigned int QtCvFile::HistogramTransform(Mat InputMat, int distribution[3][255]
         for(i=0;i<255;i++)
         {
            sum += distribution[chl][i] * 255.0 / pix;
-           temp[chl][i] = (int)sum;
-
-           if(temp[chl][i] > 255)
-           {
-               temp[chl][i] =  255;
-           }
+           temp[chl][i] = mathfun.PixLimit((int)sum);
            //cout<<temp[chl][i]<<endl;
         }
         sum = 0;
@@ -576,13 +571,41 @@ unsigned int QtCvFile::RatationTransform(Mat InputMat, Mat &OutputMat, int angle
     int i = 0;
     int j = 0;
     int chl = 0;
+    uint32 width = 0;
+    uint32 height = 0;
+    float radian = RADIAN(angle);
+    int x = 0;
+    int y = 0;
+
+    mathfun.CountRatationSize(InputMat, radian, width, height); /*Count size after ratation*/
     if(InputMat.channels() == 1)
     {
-
+         OutputMat = Mat::zeros(height, width, CV_8UC1);
+         for(i=0;i<InputMat.rows;i++)
+         {
+             for(j=0;j<InputMat.cols;j++)
+             {
+                 x = abs(((j - InputMat.cols/2))*cos(radian) - ((-i + InputMat.rows/2))*sin(radian) + width/2);
+                 y = abs(((j - InputMat.cols/2))*sin(radian) + ((-i + InputMat.rows/2))*cos(radian) - height/2);
+                  OutputMat.at<uchar>(y, x) = InputMat.at<uchar>(i, j);
+             }
+         }
     }
     else if(InputMat.channels() == 3)
     {
-
+         OutputMat = Mat::zeros(height, width, CV_8UC3);
+         for(chl=0;chl<InputMat.channels();chl++)
+         {
+             for(i=0;i<InputMat.rows;i++)
+             {
+                 for(j=0;j<InputMat.cols;j++)
+                 {
+                      x = abs(((j - InputMat.cols/2))*cos(radian) - ((-i + InputMat.rows/2))*sin(radian) + width/2);
+                      y = abs(((j - InputMat.cols/2))*sin(radian) + ((-i + InputMat.rows/2))*cos(radian) - height/2);
+                      OutputMat.at<Vec3b>(y, x)[chl] = InputMat.at<Vec3b>(i, j)[chl];
+                 }
+             }
+         }
     }
     else
     {
@@ -671,6 +694,7 @@ unsigned int QtCvFile::ConstrastTransform(Mat InputMat, Mat &OutputMat, unsigned
     return OK;
 }
 
+/*SaturationTransform*/
 unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigned int RatioSaturation)
 {
     int i=0;
@@ -788,6 +812,254 @@ unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigne
         return ERROR;
     }
     return OK;
+}
+
+
+/*Nearest neighbor interpolation*/
+unsigned int QtCvFile::NearInterTransform(Mat InputMat, Mat &OutputMat)
+{
+    int i = 0;
+    int j = 0;
+    int chl = 0;
+
+    if(InputMat.channels() == 1)
+    {
+        for(i=0;i<InputMat.rows-1;i++)
+        {
+            for(j=0;j<InputMat.cols-1;j++)
+            {
+                if(InputMat.at<uchar>(i,j) == 0 && InputMat.at<uchar>(i,j+1) != 0 && InputMat.at<uchar>(i+1,j) != 0)
+                {
+                    OutputMat.at<uchar>(i,j) = InputMat.at<uchar>(i,j+1);
+                }
+                else
+                {
+                    OutputMat.at<uchar>(i,j) = InputMat.at<uchar>(i,j);
+                }
+            }
+        }
+    }
+    else if(InputMat.channels() == 3)
+    {
+        for(chl=0;chl<InputMat.channels();chl++)
+        {
+            for(i=0;i<InputMat.rows-1;i++)
+            {
+                for(j=0;j<InputMat.cols-1;j++)
+                {
+                    if(InputMat.at<Vec3b>(i,j)[chl] == 0 && InputMat.at<Vec3b>(i,j+1)[chl] != 0 && InputMat.at<Vec3b>(i+1,j)[chl] != 0)
+                    {
+                        OutputMat.at<Vec3b>(i,j)[chl] = InputMat.at<Vec3b>(i,j+1)[chl];
+                    }
+                    else
+                    {
+                        OutputMat.at<Vec3b>(i,j)[chl] = InputMat.at<Vec3b>(i,j)[chl];
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        return ERROR;
+    }
+    return OK;
+}
+
+unsigned int QtCvFile::fftTransform(Mat InputMat, Mat &OutputMat)
+{
+    Mat initMat = mathfun.initFFT2(InputMat);
+    mathfun.FFT2(initMat, OutputMat);
+    mathfun.IFFT2(OutputMat, OutputMat);
+    return OK;
+}
+
+/*Opencv fft Transform*/
+unsigned int QtCvFile::cvDFtLowTransform(Mat InputMat, Mat &OutputMat, int CutOff)
+{
+    //调整图像加速傅里叶变换
+     int M = getOptimalDFTSize(InputMat.rows);
+     int N = getOptimalDFTSize(InputMat.cols);
+     Mat padded;
+     copyMakeBorder(InputMat, padded, 0, M - InputMat.rows, 0, N - InputMat.cols, BORDER_CONSTANT, Scalar::all(0));
+     //记录傅里叶变换的实部和虚部
+     Mat planes[] = { Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F) };
+     Mat complexImg;
+     merge(planes, 2, complexImg);
+     //进行傅里叶变换
+     dft(complexImg, complexImg);
+     //获取图像
+     Mat mag = complexImg;
+     mag = mag(Rect(0, 0, mag.cols & -2, mag.rows & -2));//这里为什么&上-2具体查看opencv文档
+     //其实是为了把行和列变成偶数 -2的二进制是11111111.......10 最后一位是0
+     //获取中心点坐标
+     int cx = mag.cols / 2;
+     int cy = mag.rows / 2;
+     //调整频域
+     Mat tmp;
+     Mat q0(mag, Rect(0, 0, cx, cy));
+     Mat q1(mag, Rect(cx, 0, cx, cy));
+     Mat q2(mag, Rect(0, cy, cx, cy));
+     Mat q3(mag, Rect(cx, cy, cx, cy));
+
+     q0.copyTo(tmp);
+     q3.copyTo(q0);
+     tmp.copyTo(q3);
+
+     q1.copyTo(tmp);
+     q2.copyTo(q1);
+     tmp.copyTo(q2);
+     //处理按公式保留中心部分
+     for (int y = 0; y < mag.rows; y++){
+         double* data = mag.ptr<double>(y);
+         for (int x = 0; x < mag.cols; x++){
+             double d = sqrt(pow((y - cy),2) + pow((x - cx),2));
+             if (d <= (double)CutOff)
+             {
+             }
+             else
+             {
+                 data[x] = 0;
+             }
+         }
+     }
+     //再调整频域
+     q0.copyTo(tmp);
+     q3.copyTo(q0);
+     tmp.copyTo(q3);
+     q1.copyTo(tmp);
+     q2.copyTo(q1);
+     tmp.copyTo(q2);
+     //逆变换
+     Mat invDFT;
+     idft(mag, invDFT, DFT_SCALE | DFT_REAL_OUTPUT); // Applying IDFT
+     invDFT.convertTo(OutputMat, CV_8U);
+     return OK;
+}
+
+/*High pass transform*/
+unsigned int QtCvFile::cvDFtHighTransform(Mat InputMat, Mat &OutputMat, int CutOff)
+{
+    //调整图像加速傅里叶变换
+     int M = getOptimalDFTSize(InputMat.rows);
+     int N = getOptimalDFTSize(InputMat.cols);
+     Mat padded;
+     copyMakeBorder(InputMat, padded, 0, M - InputMat.rows, 0, N - InputMat.cols, BORDER_CONSTANT, Scalar::all(0));
+     //记录傅里叶变换的实部和虚部
+     Mat planes[] = { Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F) };
+     Mat complexImg;
+     merge(planes, 2, complexImg);
+     //进行傅里叶变换
+     dft(complexImg, complexImg);
+     //获取图像
+     Mat mag = complexImg;
+     mag = mag(Rect(0, 0, mag.cols & -2, mag.rows & -2));//这里为什么&上-2具体查看opencv文档
+     //其实是为了把行和列变成偶数 -2的二进制是11111111.......10 最后一位是0
+     //获取中心点坐标
+     int cx = mag.cols / 2;
+     int cy = mag.rows / 2;
+     //调整频域
+     Mat tmp;
+     Mat q0(mag, Rect(0, 0, cx, cy));
+     Mat q1(mag, Rect(cx, 0, cx, cy));
+     Mat q2(mag, Rect(0, cy, cx, cy));
+     Mat q3(mag, Rect(cx, cy, cx, cy));
+
+     q0.copyTo(tmp);
+     q3.copyTo(q0);
+     tmp.copyTo(q3);
+
+     q1.copyTo(tmp);
+     q2.copyTo(q1);
+     tmp.copyTo(q2);
+     //处理按公式保留中心部分
+     for (int y = 0; y < mag.rows; y++){
+         double* data = mag.ptr<double>(y);
+         for (int x = 0; x < mag.cols; x++){
+             double d = sqrt(pow((y - cy),2) + pow((x - cx),2));
+             if (d >= CutOff)
+             {
+             }
+             else
+             {
+                 data[x] = 0;
+             }
+         }
+     }
+     //再调整频域
+     q0.copyTo(tmp);
+     q3.copyTo(q0);
+     tmp.copyTo(q3);
+     q1.copyTo(tmp);
+     q2.copyTo(q1);
+     tmp.copyTo(q2);
+     //逆变换
+     Mat invDFT;
+     idft(mag, invDFT, DFT_SCALE | DFT_REAL_OUTPUT); // Applying IDFT
+     invDFT.convertTo(OutputMat, CV_8U);
+     return OK;
+}
+
+unsigned int QtCvFile::cvDFtBandTransform(Mat InputMat, Mat &OutputMat, int CutOff0, int CutOff1)
+{
+    //调整图像加速傅里叶变换
+     int M = getOptimalDFTSize(InputMat.rows);
+     int N = getOptimalDFTSize(InputMat.cols);
+     Mat padded;
+     copyMakeBorder(InputMat, padded, 0, M - InputMat.rows, 0, N - InputMat.cols, BORDER_CONSTANT, Scalar::all(0));
+     //记录傅里叶变换的实部和虚部
+     Mat planes[] = { Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F) };
+     Mat complexImg;
+     merge(planes, 2, complexImg);
+     //进行傅里叶变换
+     dft(complexImg, complexImg);
+     //获取图像
+     Mat mag = complexImg;
+     mag = mag(Rect(0, 0, mag.cols & -2, mag.rows & -2));//这里为什么&上-2具体查看opencv文档
+     //其实是为了把行和列变成偶数 -2的二进制是11111111.......10 最后一位是0
+     //获取中心点坐标
+     int cx = mag.cols / 2;
+     int cy = mag.rows / 2;
+     //调整频域
+     Mat tmp;
+     Mat q0(mag, Rect(0, 0, cx, cy));
+     Mat q1(mag, Rect(cx, 0, cx, cy));
+     Mat q2(mag, Rect(0, cy, cx, cy));
+     Mat q3(mag, Rect(cx, cy, cx, cy));
+
+     q0.copyTo(tmp);
+     q3.copyTo(q0);
+     tmp.copyTo(q3);
+
+     q1.copyTo(tmp);
+     q2.copyTo(q1);
+     tmp.copyTo(q2);
+     //处理按公式保留中心部分
+     for (int y = 0; y < mag.rows; y++){
+         double* data = mag.ptr<double>(y);
+         for (int x = 0; x < mag.cols; x++){
+             double d = sqrt(pow((y - cy),2) + pow((x - cx),2));
+             if (d >= CutOff0 && d <= CutOff1)
+             {
+             }
+             else
+             {
+                 data[x] = 0;
+             }
+         }
+     }
+     //再调整频域
+     q0.copyTo(tmp);
+     q3.copyTo(q0);
+     tmp.copyTo(q3);
+     q1.copyTo(tmp);
+     q2.copyTo(q1);
+     tmp.copyTo(q2);
+     //逆变换
+     Mat invDFT;
+     idft(mag, invDFT, DFT_SCALE | DFT_REAL_OUTPUT); // Applying IDFT
+     invDFT.convertTo(OutputMat, CV_8U);
+     return OK;
 }
 
 unsigned int QtCvFile::ShapenTransform(Mat InputMat, Mat &OutputMat, Mat Filter, unsigned int RatioShapen)

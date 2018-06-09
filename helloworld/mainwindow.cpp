@@ -23,10 +23,10 @@ MainWindow::MainWindow(QWidget *parent) :
     AiPhoto = new winAiPhoto();/*creat a AI photo win*/
 
     connect(this->BeatifyPhoto,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-    connect(this->BeatifyPhoto,SIGNAL(WinAiDisplay(Mat)),AiPhoto,SLOT(on_gotoAiPhoto_clicked_reshow(Mat)));//当点击子界面时，调用主界面的reshow()函数
+    connect(this->BeatifyPhoto,SIGNAL(WinAiDisplay(Mat)),AiPhoto,SLOT(gotoAiPhoto_clicked_reshow(Mat)));//当点击子界面时，调用主界面的reshow()函数
 
     connect(this->AiPhoto, SIGNAL(WinDisplay()), this, SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-    connect(this->AiPhoto, SIGNAL(WinBeatifyDisplay(Mat)), BeatifyPhoto, SLOT(on_gotoBeatifyPhoto_clicked_reshow(Mat)));//当点击子界面时，调用主界面的reshow()函数
+    connect(this->AiPhoto, SIGNAL(WinBeatifyDisplay(Mat)), BeatifyPhoto, SLOT(gotoBeatifyPhoto_clicked_reshow(Mat)));//当点击子界面时，调用主界面的reshow()函数
 }
 
 MainWindow::~MainWindow()

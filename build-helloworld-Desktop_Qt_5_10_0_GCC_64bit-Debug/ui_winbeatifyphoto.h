@@ -26,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class Ui_WinBeatifyPhoto
 {
 public:
-    QPushButton *PbFilter;
+    QPushButton *PbFFtHighFilter;
     QPushButton *PbSaveFile;
     QPushButton *PbFuzzy;
     QPushButton *PbLast;
@@ -46,9 +46,9 @@ public:
     QPushButton *PbBackToMain;
     QPushButton *PbXMinior;
     QPushButton *PbCorrosion;
-    QPushButton *PbEquration_4;
+    QPushButton *PbFFtBandFilter;
     QPushButton *PbOilPaint;
-    QPushButton *PbEquration_6;
+    QPushButton *PbRatation;
     QSpinBox *SbBinarization;
     QSpinBox *SbCorrosion;
     QPushButton *PbExpand;
@@ -61,7 +61,7 @@ public:
     QLabel *label_2;
     QLabel *label_3;
     QPushButton *PbEquration_9;
-    QPushButton *PbEquration_10;
+    QPushButton *PbFFtLowFilter;
     QPushButton *PbLaplaceShape;
     QPushButton *PbClassical;
     QPushButton *PbSketch;
@@ -72,13 +72,13 @@ public:
     QPushButton *PbResetAll;
     QSpinBox *SbFuzzy;
     QSpinBox *SbGaussian;
-    QSpinBox *spinBox_8;
+    QSpinBox *SbFFtBandFilter1;
     QSpinBox *SbOilPaint;
     QSpinBox *SbSketch;
-    QSpinBox *spinBox_9;
-    QSpinBox *SbSketch_2;
+    QSpinBox *SbFFtBandFilter0;
+    QSpinBox *SbFFtHighFilter;
     QSpinBox *SbGaussian_2;
-    QSpinBox *SbOilPaint_2;
+    QSpinBox *SbFFtLowFilter;
     QSpinBox *SbFuzzy_2;
     QPushButton *PbWinAiPhoto;
 
@@ -87,9 +87,9 @@ public:
         if (WinBeatifyPhoto->objectName().isEmpty())
             WinBeatifyPhoto->setObjectName(QStringLiteral("WinBeatifyPhoto"));
         WinBeatifyPhoto->resize(1191, 819);
-        PbFilter = new QPushButton(WinBeatifyPhoto);
-        PbFilter->setObjectName(QStringLiteral("PbFilter"));
-        PbFilter->setGeometry(QRect(730, 670, 131, 41));
+        PbFFtHighFilter = new QPushButton(WinBeatifyPhoto);
+        PbFFtHighFilter->setObjectName(QStringLiteral("PbFFtHighFilter"));
+        PbFFtHighFilter->setGeometry(QRect(730, 670, 131, 41));
         PbSaveFile = new QPushButton(WinBeatifyPhoto);
         PbSaveFile->setObjectName(QStringLiteral("PbSaveFile"));
         PbSaveFile->setGeometry(QRect(10, 550, 131, 41));
@@ -152,15 +152,15 @@ public:
         PbCorrosion = new QPushButton(WinBeatifyPhoto);
         PbCorrosion->setObjectName(QStringLiteral("PbCorrosion"));
         PbCorrosion->setGeometry(QRect(310, 550, 131, 41));
-        PbEquration_4 = new QPushButton(WinBeatifyPhoto);
-        PbEquration_4->setObjectName(QStringLiteral("PbEquration_4"));
-        PbEquration_4->setGeometry(QRect(730, 730, 131, 41));
+        PbFFtBandFilter = new QPushButton(WinBeatifyPhoto);
+        PbFFtBandFilter->setObjectName(QStringLiteral("PbFFtBandFilter"));
+        PbFFtBandFilter->setGeometry(QRect(730, 730, 131, 41));
         PbOilPaint = new QPushButton(WinBeatifyPhoto);
         PbOilPaint->setObjectName(QStringLiteral("PbOilPaint"));
         PbOilPaint->setGeometry(QRect(520, 610, 131, 41));
-        PbEquration_6 = new QPushButton(WinBeatifyPhoto);
-        PbEquration_6->setObjectName(QStringLiteral("PbEquration_6"));
-        PbEquration_6->setGeometry(QRect(310, 730, 131, 41));
+        PbRatation = new QPushButton(WinBeatifyPhoto);
+        PbRatation->setObjectName(QStringLiteral("PbRatation"));
+        PbRatation->setGeometry(QRect(310, 730, 131, 41));
         SbBinarization = new QSpinBox(WinBeatifyPhoto);
         SbBinarization->setObjectName(QStringLiteral("SbBinarization"));
         SbBinarization->setGeometry(QRect(440, 490, 61, 41));
@@ -197,9 +197,9 @@ public:
         PbEquration_9 = new QPushButton(WinBeatifyPhoto);
         PbEquration_9->setObjectName(QStringLiteral("PbEquration_9"));
         PbEquration_9->setGeometry(QRect(730, 550, 131, 41));
-        PbEquration_10 = new QPushButton(WinBeatifyPhoto);
-        PbEquration_10->setObjectName(QStringLiteral("PbEquration_10"));
-        PbEquration_10->setGeometry(QRect(730, 610, 131, 41));
+        PbFFtLowFilter = new QPushButton(WinBeatifyPhoto);
+        PbFFtLowFilter->setObjectName(QStringLiteral("PbFFtLowFilter"));
+        PbFFtLowFilter->setGeometry(QRect(730, 610, 131, 41));
         PbLaplaceShape = new QPushButton(WinBeatifyPhoto);
         PbLaplaceShape->setObjectName(QStringLiteral("PbLaplaceShape"));
         PbLaplaceShape->setGeometry(QRect(520, 730, 141, 41));
@@ -230,27 +230,27 @@ public:
         SbGaussian = new QSpinBox(WinBeatifyPhoto);
         SbGaussian->setObjectName(QStringLiteral("SbGaussian"));
         SbGaussian->setGeometry(QRect(650, 550, 61, 41));
-        spinBox_8 = new QSpinBox(WinBeatifyPhoto);
-        spinBox_8->setObjectName(QStringLiteral("spinBox_8"));
-        spinBox_8->setGeometry(QRect(860, 730, 61, 41));
+        SbFFtBandFilter1 = new QSpinBox(WinBeatifyPhoto);
+        SbFFtBandFilter1->setObjectName(QStringLiteral("SbFFtBandFilter1"));
+        SbFFtBandFilter1->setGeometry(QRect(860, 730, 61, 41));
         SbOilPaint = new QSpinBox(WinBeatifyPhoto);
         SbOilPaint->setObjectName(QStringLiteral("SbOilPaint"));
         SbOilPaint->setGeometry(QRect(650, 610, 61, 41));
         SbSketch = new QSpinBox(WinBeatifyPhoto);
         SbSketch->setObjectName(QStringLiteral("SbSketch"));
         SbSketch->setGeometry(QRect(650, 670, 61, 41));
-        spinBox_9 = new QSpinBox(WinBeatifyPhoto);
-        spinBox_9->setObjectName(QStringLiteral("spinBox_9"));
-        spinBox_9->setGeometry(QRect(670, 730, 61, 41));
-        SbSketch_2 = new QSpinBox(WinBeatifyPhoto);
-        SbSketch_2->setObjectName(QStringLiteral("SbSketch_2"));
-        SbSketch_2->setGeometry(QRect(860, 670, 61, 41));
+        SbFFtBandFilter0 = new QSpinBox(WinBeatifyPhoto);
+        SbFFtBandFilter0->setObjectName(QStringLiteral("SbFFtBandFilter0"));
+        SbFFtBandFilter0->setGeometry(QRect(670, 730, 61, 41));
+        SbFFtHighFilter = new QSpinBox(WinBeatifyPhoto);
+        SbFFtHighFilter->setObjectName(QStringLiteral("SbFFtHighFilter"));
+        SbFFtHighFilter->setGeometry(QRect(860, 670, 61, 41));
         SbGaussian_2 = new QSpinBox(WinBeatifyPhoto);
         SbGaussian_2->setObjectName(QStringLiteral("SbGaussian_2"));
         SbGaussian_2->setGeometry(QRect(860, 550, 61, 41));
-        SbOilPaint_2 = new QSpinBox(WinBeatifyPhoto);
-        SbOilPaint_2->setObjectName(QStringLiteral("SbOilPaint_2"));
-        SbOilPaint_2->setGeometry(QRect(860, 610, 61, 41));
+        SbFFtLowFilter = new QSpinBox(WinBeatifyPhoto);
+        SbFFtLowFilter->setObjectName(QStringLiteral("SbFFtLowFilter"));
+        SbFFtLowFilter->setGeometry(QRect(860, 610, 61, 41));
         SbFuzzy_2 = new QSpinBox(WinBeatifyPhoto);
         SbFuzzy_2->setObjectName(QStringLiteral("SbFuzzy_2"));
         SbFuzzy_2->setGeometry(QRect(860, 490, 61, 41));
@@ -266,7 +266,7 @@ public:
     void retranslateUi(QWidget *WinBeatifyPhoto)
     {
         WinBeatifyPhoto->setWindowTitle(QApplication::translate("WinBeatifyPhoto", "Form", nullptr));
-        PbFilter->setText(QApplication::translate("WinBeatifyPhoto", "FFTHighFilter", nullptr));
+        PbFFtHighFilter->setText(QApplication::translate("WinBeatifyPhoto", "FFTHighFilter", nullptr));
         PbSaveFile->setText(QApplication::translate("WinBeatifyPhoto", "Save File", nullptr));
         PbFuzzy->setText(QApplication::translate("WinBeatifyPhoto", "Fuzzy", nullptr));
         PbLast->setText(QApplication::translate("WinBeatifyPhoto", "Last", nullptr));
@@ -283,9 +283,9 @@ public:
         PbBackToMain->setText(QApplication::translate("WinBeatifyPhoto", "BackToMain", nullptr));
         PbXMinior->setText(QApplication::translate("WinBeatifyPhoto", "minior_X", nullptr));
         PbCorrosion->setText(QApplication::translate("WinBeatifyPhoto", "Corrosion", nullptr));
-        PbEquration_4->setText(QApplication::translate("WinBeatifyPhoto", "FFTBandFilter", nullptr));
+        PbFFtBandFilter->setText(QApplication::translate("WinBeatifyPhoto", "FFTBandFilter", nullptr));
         PbOilPaint->setText(QApplication::translate("WinBeatifyPhoto", "OilPaint", nullptr));
-        PbEquration_6->setText(QApplication::translate("WinBeatifyPhoto", "Ratation", nullptr));
+        PbRatation->setText(QApplication::translate("WinBeatifyPhoto", "Ratation", nullptr));
         PbExpand->setText(QApplication::translate("WinBeatifyPhoto", "expand", nullptr));
         PbShapen->setText(QApplication::translate("WinBeatifyPhoto", "sharpen", nullptr));
         PbConfirm->setText(QApplication::translate("WinBeatifyPhoto", "Confirm", nullptr));
@@ -293,7 +293,7 @@ public:
         label_2->setText(QApplication::translate("WinBeatifyPhoto", "ST", nullptr));
         label_3->setText(QApplication::translate("WinBeatifyPhoto", "CT", nullptr));
         PbEquration_9->setText(QApplication::translate("WinBeatifyPhoto", "unused", nullptr));
-        PbEquration_10->setText(QApplication::translate("WinBeatifyPhoto", "FFTLowFilter", nullptr));
+        PbFFtLowFilter->setText(QApplication::translate("WinBeatifyPhoto", "FFTLowFilter", nullptr));
         PbLaplaceShape->setText(QApplication::translate("WinBeatifyPhoto", "LaplaceShape", nullptr));
         PbClassical->setText(QApplication::translate("WinBeatifyPhoto", "Classical", nullptr));
         PbSketch->setText(QApplication::translate("WinBeatifyPhoto", "Sketch", nullptr));

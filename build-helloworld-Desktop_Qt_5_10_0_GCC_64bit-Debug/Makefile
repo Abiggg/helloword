@@ -57,12 +57,16 @@ SOURCES       = ../helloworld/main.cpp \
 		../helloworld/mathfun.cpp \
 		../helloworld/winbeatifyphoto.cpp \
 		../helloworld/winaiphoto.cpp \
-		../helloworld/datast.cpp qrc_defaultphoto.cpp \
+		../helloworld/datast.cpp \
+		../helloworld/threadfromqthread.cpp \
+		../helloworld/mathlib.cpp \
+		../helloworld/bpnetwork.cpp qrc_defaultphoto.cpp \
 		moc_mainwindow.cpp \
 		moc_stdqtcvfile.cpp \
 		moc_stdimagebasic.cpp \
 		moc_winbeatifyphoto.cpp \
-		moc_winaiphoto.cpp
+		moc_winaiphoto.cpp \
+		moc_threadfromqthread.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		stdqtcvfile.o \
@@ -71,12 +75,16 @@ OBJECTS       = main.o \
 		winbeatifyphoto.o \
 		winaiphoto.o \
 		datast.o \
+		threadfromqthread.o \
+		mathlib.o \
+		bpnetwork.o \
 		qrc_defaultphoto.o \
 		moc_mainwindow.o \
 		moc_stdqtcvfile.o \
 		moc_stdimagebasic.o \
 		moc_winbeatifyphoto.o \
-		moc_winaiphoto.o
+		moc_winaiphoto.o \
+		moc_threadfromqthread.o
 DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/common/linux.conf \
@@ -259,14 +267,20 @@ DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../helloworld/mathfun.h \
 		../helloworld/winbeatifyphoto.h \
 		../helloworld/winaiphoto.h \
-		../helloworld/datast.h ../helloworld/main.cpp \
+		../helloworld/datast.h \
+		../helloworld/threadfromqthread.h \
+		../helloworld/mathlib.h \
+		../helloworld/bpnetwork.h ../helloworld/main.cpp \
 		../helloworld/mainwindow.cpp \
 		../helloworld/stdqtcvfile.cpp \
 		../helloworld/stdimagebasic.cpp \
 		../helloworld/mathfun.cpp \
 		../helloworld/winbeatifyphoto.cpp \
 		../helloworld/winaiphoto.cpp \
-		../helloworld/datast.cpp
+		../helloworld/datast.cpp \
+		../helloworld/threadfromqthread.cpp \
+		../helloworld/mathlib.cpp \
+		../helloworld/bpnetwork.cpp
 QMAKE_TARGET  = helloworld
 DESTDIR       = 
 TARGET        = helloworld
@@ -655,8 +669,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../helloworld/defaultphoto.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../helloworld/mainwindow.h ../helloworld/stddatatype.h ../helloworld/stdqtcvfile.h ../helloworld/stdimagebasic.h ../helloworld/mathfun.h ../helloworld/winbeatifyphoto.h ../helloworld/winaiphoto.h ../helloworld/datast.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../helloworld/main.cpp ../helloworld/mainwindow.cpp ../helloworld/stdqtcvfile.cpp ../helloworld/stdimagebasic.cpp ../helloworld/mathfun.cpp ../helloworld/winbeatifyphoto.cpp ../helloworld/winaiphoto.cpp ../helloworld/datast.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../helloworld/mainwindow.h ../helloworld/stddatatype.h ../helloworld/stdqtcvfile.h ../helloworld/stdimagebasic.h ../helloworld/mathfun.h ../helloworld/winbeatifyphoto.h ../helloworld/winaiphoto.h ../helloworld/datast.h ../helloworld/threadfromqthread.h ../helloworld/mathlib.h ../helloworld/bpnetwork.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../helloworld/main.cpp ../helloworld/mainwindow.cpp ../helloworld/stdqtcvfile.cpp ../helloworld/stdimagebasic.cpp ../helloworld/mathfun.cpp ../helloworld/winbeatifyphoto.cpp ../helloworld/winaiphoto.cpp ../helloworld/datast.cpp ../helloworld/threadfromqthread.cpp ../helloworld/mathlib.cpp ../helloworld/bpnetwork.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../helloworld/mainwindow.ui ../helloworld/winbeatifyphoto.ui ../helloworld/winaiphoto.ui $(DISTDIR)/
 
 
@@ -695,9 +709,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_stdqtcvfile.cpp moc_stdimagebasic.cpp moc_winbeatifyphoto.cpp moc_winaiphoto.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_stdqtcvfile.cpp moc_stdimagebasic.cpp moc_winbeatifyphoto.cpp moc_winaiphoto.cpp moc_threadfromqthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_stdqtcvfile.cpp moc_stdimagebasic.cpp moc_winbeatifyphoto.cpp moc_winaiphoto.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_stdqtcvfile.cpp moc_stdimagebasic.cpp moc_winbeatifyphoto.cpp moc_winaiphoto.cpp moc_threadfromqthread.cpp
 moc_mainwindow.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -813,6 +827,126 @@ moc_mainwindow.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QMainWindow \
 		../helloworld/datast.h \
 		../helloworld/stdimagebasic.h \
 		../helloworld/winaiphoto.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QString \
+		../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		../helloworld/mainwindow.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
@@ -1255,14 +1389,360 @@ moc_winaiphoto.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QString \
 		../helloworld/stdqtcvfile.h \
 		../helloworld/stddatatype.h \
 		../helloworld/mathfun.h \
 		../helloworld/stdimagebasic.h \
+		../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		../helloworld/winaiphoto.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
 	/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/linux-g++ -I/home/abig/project/project4/hello/helloworld -I/usr/local/include/opencv -I/opt/Qt5.10.0/5.10.0/gcc_64/include -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../helloworld/winaiphoto.h -o moc_winaiphoto.cpp
+
+moc_threadfromqthread.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qset.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
+		../helloworld/threadfromqthread.h \
+		moc_predefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
+	/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/linux-g++ -I/home/abig/project/project4/hello/helloworld -I/usr/local/include/opencv -I/opt/Qt5.10.0/5.10.0/gcc_64/include -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui -I/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../helloworld/threadfromqthread.h -o moc_threadfromqthread.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1415,7 +1895,125 @@ main.o: ../helloworld/main.cpp /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAp
 		../helloworld/winbeatifyphoto.h \
 		../helloworld/datast.h \
 		../helloworld/stdimagebasic.h \
-		../helloworld/winaiphoto.h
+		../helloworld/winaiphoto.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QString \
+		../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../helloworld/main.cpp
 
 mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
@@ -1534,6 +2132,126 @@ mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
 		../helloworld/datast.h \
 		../helloworld/stdimagebasic.h \
 		../helloworld/winaiphoto.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QString \
+		../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		ui_mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAction \
@@ -1541,8 +2259,6 @@ mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qactiongroup.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qapplication.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qguiapplication.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qinputmethod.h \
@@ -1553,13 +2269,10 @@ mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qstyleoption.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvalidator.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qslider.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractslider.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qstyle.h \
@@ -1973,7 +2686,121 @@ winbeatifyphoto.o: ../helloworld/winbeatifyphoto.cpp ../helloworld/winbeatifypho
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtextformat.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpen.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QString \
-		../helloworld/winaiphoto.h
+		../helloworld/winaiphoto.h \
+		../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o winbeatifyphoto.o ../helloworld/winbeatifyphoto.cpp
 
 winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
@@ -2080,10 +2907,130 @@ winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QString \
 		../helloworld/stdqtcvfile.h \
 		../helloworld/stddatatype.h \
 		../helloworld/mathfun.h \
 		../helloworld/stdimagebasic.h \
+		../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		ui_winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAction \
@@ -2092,8 +3039,6 @@ winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qactiongroup.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qapplication.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qguiapplication.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qinputmethod.h \
@@ -2104,13 +3049,10 @@ winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qstyleoption.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvalidator.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qslider.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractslider.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qstyle.h \
@@ -2119,9 +3061,16 @@ winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qlabel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QListWidget \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qlistview.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QProgressBar \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qprogressbar.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QStackedWidget \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qstackedwidget.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QTextBrowser \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtextbrowser.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtextedit.h \
@@ -2135,12 +3084,243 @@ winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
 		../helloworld/mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
-		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QImage
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QImage \
+		../helloworld/mathlib.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o winaiphoto.o ../helloworld/winaiphoto.cpp
 
 datast.o: ../helloworld/datast.cpp ../helloworld/datast.h \
 		../helloworld/stddatatype.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o datast.o ../helloworld/datast.cpp
+
+threadfromqthread.o: ../helloworld/threadfromqthread.cpp ../helloworld/threadfromqthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qset.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QMutex \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCore \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QtCoreDepends \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstractstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qabstracttransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbitarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbuffer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qbytearraymatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcache.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcollator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineoption.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcommandlineparser.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qcryptographichash.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdatetime.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qdiriterator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeasingcurve.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qendian.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qeventtransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfileselector.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfinalstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qfuturewatcher.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qhistorystate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qidentityproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qisenum.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonarray.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibrary.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlibraryinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qversionnumber.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlinkedlist.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qlockfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qloggingcategory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedata.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimedatabase.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qmimetype.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpauseanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qplugin.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpointer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpluginloader.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qprocess.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qpropertyanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qvariantanimation.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qqueue.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qrandom.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qreadwritelock.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qresource.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsavefile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsettings.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsharedmemory.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignalmapper.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsignaltransition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsocketnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstack.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstate.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstatemachine.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstorageinfo.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qstringlistmodel.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qsystemsemaphore.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporarydir.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QScopedPointer \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtemporaryfile.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtextcodec.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qthreadstorage.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimeline.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtranslator.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwaitcondition.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qwineventnotifier.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
+		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o threadfromqthread.o ../helloworld/threadfromqthread.cpp
+
+mathlib.o: ../helloworld/mathlib.cpp ../helloworld/mathlib.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mathlib.o ../helloworld/mathlib.cpp
+
+bpnetwork.o: ../helloworld/bpnetwork.cpp ../helloworld/bpnetwork.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bpnetwork.o ../helloworld/bpnetwork.cpp
 
 qrc_defaultphoto.o: qrc_defaultphoto.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_defaultphoto.o qrc_defaultphoto.cpp
@@ -2159,6 +3339,9 @@ moc_winbeatifyphoto.o: moc_winbeatifyphoto.cpp
 
 moc_winaiphoto.o: moc_winaiphoto.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_winaiphoto.o moc_winaiphoto.cpp
+
+moc_threadfromqthread.o: moc_threadfromqthread.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_threadfromqthread.o moc_threadfromqthread.cpp
 
 ####### Install
 

@@ -31,7 +31,10 @@ SOURCES += \
     mathfun.cpp \
     winbeatifyphoto.cpp \
     winaiphoto.cpp \
-    datast.cpp
+    datast.cpp \
+    threadfromqthread.cpp \
+    mathlib.cpp \
+    bpnetwork.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -41,7 +44,10 @@ HEADERS += \
     mathfun.h \
     winbeatifyphoto.h \
     winaiphoto.h \
-    datast.h
+    datast.h \
+    threadfromqthread.h \
+    mathlib.h \
+    bpnetwork.h
 
 FORMS += \
     mainwindow.ui \

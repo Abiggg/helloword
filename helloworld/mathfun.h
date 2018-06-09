@@ -25,7 +25,6 @@ public:
     MathFun();
 
 public:
-
     /*binary function*/
     int Binary(int x, uint32 Binarythreshold);
 
@@ -36,6 +35,7 @@ public:
 
     /*Gaussian Function*/
     float GaussianFun(int x, int y, uint8 FilterSize, float sigma);
+    float GaussianFilterFun(int x, int y, int centerX, int centerY, int CutOff);
 
     /*Count RBG Mean*/
     uint32 CountRgbMean(Mat MatIn, uint8 RgbMean[3]);
@@ -46,13 +46,13 @@ public:
     uint32 CoutClassical(uint32 RgbSrc[3],uint32 RgbDst[3]);
 
     /*ratation fun*/
-    uint32 CountRatationSize(Mat matIn, float radian, uint32 width, uint32 height);
+    uint32 CoordinateRatation(CoordinateXY_S SrcXY, CoordinateXY_S& DstXY, float radian);
+    uint32 CountRatationSize(Mat matIn, float radian, uint32& width, uint32& height);
 
-    /*init FFT*/
-    uint32 initFFT(Mat MatIn, Mat& InitMat);
-    uint32 fftFun(Mat InitMat, Mat &fftMat);
-    uint32 fftSpectrum(Mat fftMat, Mat &fftSpecMat);
-
+    /*FFT*/
+    Mat initFFT2(Mat &src);
+    void FFT2(Mat &TD, Mat &FD);
+    void IFFT2(Mat &src, Mat &dst);
     /*pix limit*/
     int PixLimit(int x);
 private:

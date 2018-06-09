@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="PbFilter">
+  <widget class="QPushButton" name="PbFFtHighFilter">
    <property name="geometry">
     <rect>
      <x>730</x>
@@ -279,7 +279,7 @@
     <string>Corrosion</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="PbEquration_4">
+  <widget class="QPushButton" name="PbFFtBandFilter">
    <property name="geometry">
     <rect>
      <x>730</x>
@@ -305,7 +305,7 @@
     <string>OilPaint</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="PbEquration_6">
+  <widget class="QPushButton" name="PbRatation">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -459,7 +459,7 @@
     <string>unused</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="PbEquration_10">
+  <widget class="QPushButton" name="PbFFtLowFilter">
    <property name="geometry">
     <rect>
      <x>730</x>
@@ -593,7 +593,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_8">
+  <widget class="QSpinBox" name="SbFFtBandFilter1">
    <property name="geometry">
     <rect>
      <x>860</x>
@@ -623,7 +623,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_9">
+  <widget class="QSpinBox" name="SbFFtBandFilter0">
    <property name="geometry">
     <rect>
      <x>670</x>
@@ -633,7 +633,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QSpinBox" name="SbSketch_2">
+  <widget class="QSpinBox" name="SbFFtHighFilter">
    <property name="geometry">
     <rect>
      <x>860</x>
@@ -653,7 +653,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QSpinBox" name="SbOilPaint_2">
+  <widget class="QSpinBox" name="SbFFtLowFilter">
    <property name="geometry">
     <rect>
      <x>860</x>
