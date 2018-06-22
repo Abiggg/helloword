@@ -36,6 +36,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::OpenCamera()
 {
+#if 0
     Mat frame;
     VideoCapture cap(0);
     namedWindow("Live", 0);
@@ -58,7 +59,47 @@ void MainWindow::OpenCamera()
             break;
         }
     }
+#endif
+    Mat frame;
+    VideoCapture cap(0);
+    ThreadMainWinInit();
+    if(ThreadMainWin->isRunning())
+    {
+        return;
+    }
+     ThreadMainWin->start(); /*Start a thread*/
+
+    if(!cap.isOpened())
+    {
+        cout<<"camera opened failed"<<endl;
+    }
+
+    while(1)
+    {
+        if(!ThreadMainWin->isPhoto)
+        {
+            cap>>frame;
+            srcMat = frame;
+            CHECK(QtCv.cvMat2QImage(frame,srcQImg));
+            ui->LbCameraArea->setPixmap(QPixmap::fromImage(srcQImg));
+            waitKey(30);
+        }
+        else
+        {
+            cap.release();
+            ui->LbCameraArea->setPixmap(QPixmap::fromImage(srcQImg));
+            ThreadMainWin->terminate();  /*end this thread*/
+        }
+    }
+
 }
+
+/*Main ai thread init*/
+void MainWindow::ThreadMainWinInit()
+{
+    ThreadMainWin = new ThreadFromQthread();
+}
+
 
 void MainWindow::reshow()
 {

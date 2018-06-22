@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_winAiPhoto_t {
-    QByteArrayData data[19];
-    char stringdata0[306];
+    QByteArrayData data[21];
+    char stringdata0[345];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,25 +41,28 @@ QT_MOC_LITERAL(6, 52, 26), // "gotoAiPhoto_clicked_reshow"
 QT_MOC_LITERAL(7, 79, 6), // "SrcMat"
 QT_MOC_LITERAL(8, 86, 14), // "ReceiveMessage"
 QT_MOC_LITERAL(9, 101, 5), // "count"
-QT_MOC_LITERAL(10, 107, 23), // "on_PbBackToMain_clicked"
-QT_MOC_LITERAL(11, 131, 23), // "on_PbWinBeatify_clicked"
-QT_MOC_LITERAL(12, 155, 21), // "on_PbOpenFile_clicked"
-QT_MOC_LITERAL(13, 177, 21), // "on_PbSaveFile_clicked"
-QT_MOC_LITERAL(14, 199, 23), // "on_PbStratTrain_clicked"
-QT_MOC_LITERAL(15, 223, 21), // "on_PbEndTrain_clicked"
-QT_MOC_LITERAL(16, 245, 28), // "on_LwAiFun_currentRowChanged"
-QT_MOC_LITERAL(17, 274, 10), // "currentRow"
-QT_MOC_LITERAL(18, 285, 20) // "on_PbBpStart_clicked"
+QT_MOC_LITERAL(10, 107, 23), // "ReceiveBpNetCrossEntroy"
+QT_MOC_LITERAL(11, 131, 12), // "CrossEntropy"
+QT_MOC_LITERAL(12, 144, 23), // "on_PbBackToMain_clicked"
+QT_MOC_LITERAL(13, 168, 23), // "on_PbWinBeatify_clicked"
+QT_MOC_LITERAL(14, 192, 21), // "on_PbOpenFile_clicked"
+QT_MOC_LITERAL(15, 214, 21), // "on_PbSaveFile_clicked"
+QT_MOC_LITERAL(16, 236, 28), // "on_LwAiFun_currentRowChanged"
+QT_MOC_LITERAL(17, 265, 10), // "currentRow"
+QT_MOC_LITERAL(18, 276, 18), // "on_PbFlash_clicked"
+QT_MOC_LITERAL(19, 295, 25), // "on_PbBpStartTrain_clicked"
+QT_MOC_LITERAL(20, 321, 23) // "on_PbBpEndTrain_clicked"
 
     },
     "winAiPhoto\0WinDisplay\0\0WinBeatifyDisplay\0"
     "Mat\0matCur\0gotoAiPhoto_clicked_reshow\0"
     "SrcMat\0ReceiveMessage\0count\0"
+    "ReceiveBpNetCrossEntroy\0CrossEntropy\0"
     "on_PbBackToMain_clicked\0on_PbWinBeatify_clicked\0"
     "on_PbOpenFile_clicked\0on_PbSaveFile_clicked\0"
-    "on_PbStratTrain_clicked\0on_PbEndTrain_clicked\0"
     "on_LwAiFun_currentRowChanged\0currentRow\0"
-    "on_PbBpStart_clicked"
+    "on_PbFlash_clicked\0on_PbBpStartTrain_clicked\0"
+    "on_PbBpEndTrain_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +72,7 @@ static const uint qt_meta_data_winAiPhoto[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,20 +80,21 @@ static const uint qt_meta_data_winAiPhoto[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   74,    2, 0x06 /* Public */,
-       3,    1,   75,    2, 0x06 /* Public */,
+       1,    0,   79,    2, 0x06 /* Public */,
+       3,    1,   80,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   78,    2, 0x08 /* Private */,
-       8,    1,   81,    2, 0x08 /* Private */,
-      10,    0,   84,    2, 0x08 /* Private */,
-      11,    0,   85,    2, 0x08 /* Private */,
-      12,    0,   86,    2, 0x08 /* Private */,
-      13,    0,   87,    2, 0x08 /* Private */,
-      14,    0,   88,    2, 0x08 /* Private */,
-      15,    0,   89,    2, 0x08 /* Private */,
-      16,    1,   90,    2, 0x08 /* Private */,
-      18,    0,   93,    2, 0x08 /* Private */,
+       6,    1,   83,    2, 0x08 /* Private */,
+       8,    1,   86,    2, 0x08 /* Private */,
+      10,    1,   89,    2, 0x08 /* Private */,
+      12,    0,   92,    2, 0x08 /* Private */,
+      13,    0,   93,    2, 0x08 /* Private */,
+      14,    0,   94,    2, 0x08 /* Private */,
+      15,    0,   95,    2, 0x08 /* Private */,
+      16,    1,   96,    2, 0x08 /* Private */,
+      18,    0,   99,    2, 0x08 /* Private */,
+      19,    0,  100,    2, 0x08 /* Private */,
+      20,    0,  101,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -99,13 +103,14 @@ static const uint qt_meta_data_winAiPhoto[] = {
  // slots: parameters
     QMetaType::Void, 0x80000000 | 4,    7,
     QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Float,   11,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -121,14 +126,15 @@ void winAiPhoto::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->WinBeatifyDisplay((*reinterpret_cast< Mat(*)>(_a[1]))); break;
         case 2: _t->gotoAiPhoto_clicked_reshow((*reinterpret_cast< Mat(*)>(_a[1]))); break;
         case 3: _t->ReceiveMessage((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->on_PbBackToMain_clicked(); break;
-        case 5: _t->on_PbWinBeatify_clicked(); break;
-        case 6: _t->on_PbOpenFile_clicked(); break;
-        case 7: _t->on_PbSaveFile_clicked(); break;
-        case 8: _t->on_PbStratTrain_clicked(); break;
-        case 9: _t->on_PbEndTrain_clicked(); break;
-        case 10: _t->on_LwAiFun_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->on_PbBpStart_clicked(); break;
+        case 4: _t->ReceiveBpNetCrossEntroy((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 5: _t->on_PbBackToMain_clicked(); break;
+        case 6: _t->on_PbWinBeatify_clicked(); break;
+        case 7: _t->on_PbOpenFile_clicked(); break;
+        case 8: _t->on_PbSaveFile_clicked(); break;
+        case 9: _t->on_LwAiFun_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->on_PbFlash_clicked(); break;
+        case 11: _t->on_PbBpStartTrain_clicked(); break;
+        case 12: _t->on_PbBpEndTrain_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -175,13 +181,13 @@ int winAiPhoto::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

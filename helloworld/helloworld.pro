@@ -34,7 +34,8 @@ SOURCES += \
     datast.cpp \
     threadfromqthread.cpp \
     mathlib.cpp \
-    bpnetwork.cpp
+    bpnetwork.cpp \
+    stdfile.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -47,7 +48,8 @@ HEADERS += \
     datast.h \
     threadfromqthread.h \
     mathlib.h \
-    bpnetwork.h
+    bpnetwork.h \
+    stdfile.h
 
 FORMS += \
     mainwindow.ui \

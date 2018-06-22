@@ -12,6 +12,7 @@
 #include "stdqtcvfile.h"
 #include "winbeatifyphoto.h"
 #include "winaiphoto.h"
+#include "threadfromqthread.h"
 
 using namespace cv;
 using namespace std;
@@ -30,6 +31,7 @@ public:
 
 public:
     void OpenCamera();
+    void ThreadMainWinInit();
 
 public:
     Mat srcMat;
@@ -39,6 +41,7 @@ public:
 
 private slots:
     void reshow();
+
     void on_PbPhotoGraph_clicked();
 
     void on_PbBeautifyPhoto_clicked();
@@ -48,6 +51,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QtCvFile QtCv;
+    ThreadFromQthread *ThreadMainWin;
 };
 
 #endif // MAINWINDOW_H

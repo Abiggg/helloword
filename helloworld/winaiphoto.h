@@ -11,6 +11,7 @@
 #include "stdqtcvfile.h"
 #include "stdimagebasic.h"
 #include "threadfromqthread.h"
+#include "bpnetwork.h"
 
 namespace Ui {
 class winAiPhoto;
@@ -33,8 +34,9 @@ public:
     void WinProgressBarInit(); /*Progress Bar Finish Percent*/
     void AiThreadInit();
     void StackWidgetInit();
+    void LableEditInit();
+    void BpLableEditInit();
     void winAiPhotoInit();
-
 
 signals:
     void WinDisplay();
@@ -45,6 +47,8 @@ private slots:
 
     void ReceiveMessage(int count);
 
+    void ReceiveBpNetCrossEntroy(float CrossEntropy);
+
     void on_PbBackToMain_clicked();
 
     void on_PbWinBeatify_clicked();
@@ -53,17 +57,18 @@ private slots:
 
     void on_PbSaveFile_clicked();
 
-    void on_PbStratTrain_clicked();
-
-    void on_PbEndTrain_clicked();
-
     void on_LwAiFun_currentRowChanged(int currentRow);
 
-    void on_PbBpStart_clicked();
+    void on_PbFlash_clicked();
+
+    void on_PbBpStartTrain_clicked();
+
+    void on_PbBpEndTrain_clicked();
 
 private:
     Ui::winAiPhoto *ui;
     ThreadFromQthread *AiThread;
+    //BpNetwork bpNetwork;
 
     QtCvFile QtCv;
     stdImageBasic ImageBasic;
