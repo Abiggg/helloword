@@ -15,11 +15,16 @@ using namespace std;
 float GetRamdom_B1_1();
 
 /*Sigmoid function*/
-float Sigmoid(float x);
-float DiffSigmoid(float x);
-
+float Sigmoid(float x, int sigmoidA);
+float DiffSigmoid(float x, int sigmoidA);
 /*Transform mat by sigmoid fun*/
-void MatSigmoid(Mat matIn, Mat& matOut, Mat& matDiffSigmoid);
+void MatSigmoid(Mat matIn, Mat& matOut, Mat& matDiffSigmoid, int sigmoidA);
+
+/*Relu ativate*/
+float Relu(float x);
+float DiffRelu(float x);
+/*Transform mat by Relu fun*/
+void MatRelu(Mat matIn, Mat& matOut, Mat& matDiffSigmoid);
 
 /*mat softmax*/
 void MatSoftmax(Mat matIn, Mat& matOut);
@@ -43,5 +48,8 @@ Mat MatCombine(Mat matX);
 int MatMaxfloat(Mat matX);
 
 int MatMaxInt(Mat matX);
+
+/*Decay rate*/
+float DecayRate(float learnRate, float decay_rate, int global_step, int decay_steps);
 
 #endif // MATHLIB_H

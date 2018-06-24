@@ -37,23 +37,38 @@ void ThreadFromQthread::StartProgess(int i)
 void ThreadFromQthread::run()
 {
     int count = 0;
+    int TestNum = 0;
     isCanRun = true; /*can be run*/
+
+    Mat BpTestMatOut;
+    int BpTestValue = 0;
+    bool BpTestIsTrue = false;
+
     while(1)
     {
         sleep(1);
-        ++count;
-        emit message(count);
-        //QKeyEventDetect();
-        bpNetwork.BpNetWorkTrain();
-        emit sendCrossEntropy(bpNetwork.CrossEntropy);
+        switch(branch)
+        {
+            case 0:/*test*/
+                ++count;
+                emit message(count);
+                continue;
 
-        if(RunCount == count)
-        {
-            break;
-        }
-        if(!isCanRun)
-        {
-            return;
+            case 1: /*bpTrain*/
+                bpNetwork.BpNetWorkTrain();
+                emit sendCrossEntropy(bpNetwork.CrossEntropy);
+                continue;
+
+            case 2: /*BpTest*/
+                bpNetwork.BpNetWorkTest(TestNum, BpTestMatOut, BpTestValue, BpTestIsTrue);
+                emit sendBpTestResult(TestNum, BpTestValue, BpTestIsTrue);
+                TestNum ++;
+                continue;
+
+            case 3:
+                //QKeyEventDetect();
+            default:
+                cout<<"error"<<endl;
         }
     }
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_winAiPhoto_t {
-    QByteArrayData data[21];
-    char stringdata0[345];
+    QByteArrayData data[28];
+    char stringdata0[472];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,26 +43,37 @@ QT_MOC_LITERAL(8, 86, 14), // "ReceiveMessage"
 QT_MOC_LITERAL(9, 101, 5), // "count"
 QT_MOC_LITERAL(10, 107, 23), // "ReceiveBpNetCrossEntroy"
 QT_MOC_LITERAL(11, 131, 12), // "CrossEntropy"
-QT_MOC_LITERAL(12, 144, 23), // "on_PbBackToMain_clicked"
-QT_MOC_LITERAL(13, 168, 23), // "on_PbWinBeatify_clicked"
-QT_MOC_LITERAL(14, 192, 21), // "on_PbOpenFile_clicked"
-QT_MOC_LITERAL(15, 214, 21), // "on_PbSaveFile_clicked"
-QT_MOC_LITERAL(16, 236, 28), // "on_LwAiFun_currentRowChanged"
-QT_MOC_LITERAL(17, 265, 10), // "currentRow"
-QT_MOC_LITERAL(18, 276, 18), // "on_PbFlash_clicked"
-QT_MOC_LITERAL(19, 295, 25), // "on_PbBpStartTrain_clicked"
-QT_MOC_LITERAL(20, 321, 23) // "on_PbBpEndTrain_clicked"
+QT_MOC_LITERAL(12, 144, 19), // "ReceiveBpTestResult"
+QT_MOC_LITERAL(13, 164, 10), // "BpImageNum"
+QT_MOC_LITERAL(14, 175, 11), // "BpTestValue"
+QT_MOC_LITERAL(15, 187, 12), // "BpTestIsTrue"
+QT_MOC_LITERAL(16, 200, 23), // "on_PbBackToMain_clicked"
+QT_MOC_LITERAL(17, 224, 23), // "on_PbWinBeatify_clicked"
+QT_MOC_LITERAL(18, 248, 21), // "on_PbOpenFile_clicked"
+QT_MOC_LITERAL(19, 270, 21), // "on_PbSaveFile_clicked"
+QT_MOC_LITERAL(20, 292, 28), // "on_LwAiFun_currentRowChanged"
+QT_MOC_LITERAL(21, 321, 10), // "currentRow"
+QT_MOC_LITERAL(22, 332, 18), // "on_PbFlash_clicked"
+QT_MOC_LITERAL(23, 351, 25), // "on_PbBpStartTrain_clicked"
+QT_MOC_LITERAL(24, 377, 23), // "on_PbBpEndTrain_clicked"
+QT_MOC_LITERAL(25, 401, 24), // "on_PbBpStartTest_clicked"
+QT_MOC_LITERAL(26, 426, 22), // "on_PbBpEndTest_clicked"
+QT_MOC_LITERAL(27, 449, 22) // "on_PbLNetFlash_clicked"
 
     },
     "winAiPhoto\0WinDisplay\0\0WinBeatifyDisplay\0"
     "Mat\0matCur\0gotoAiPhoto_clicked_reshow\0"
     "SrcMat\0ReceiveMessage\0count\0"
     "ReceiveBpNetCrossEntroy\0CrossEntropy\0"
+    "ReceiveBpTestResult\0BpImageNum\0"
+    "BpTestValue\0BpTestIsTrue\0"
     "on_PbBackToMain_clicked\0on_PbWinBeatify_clicked\0"
     "on_PbOpenFile_clicked\0on_PbSaveFile_clicked\0"
     "on_LwAiFun_currentRowChanged\0currentRow\0"
     "on_PbFlash_clicked\0on_PbBpStartTrain_clicked\0"
-    "on_PbBpEndTrain_clicked"
+    "on_PbBpEndTrain_clicked\0"
+    "on_PbBpStartTest_clicked\0"
+    "on_PbBpEndTest_clicked\0on_PbLNetFlash_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,7 +83,7 @@ static const uint qt_meta_data_winAiPhoto[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,21 +91,25 @@ static const uint qt_meta_data_winAiPhoto[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x06 /* Public */,
-       3,    1,   80,    2, 0x06 /* Public */,
+       1,    0,   99,    2, 0x06 /* Public */,
+       3,    1,  100,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   83,    2, 0x08 /* Private */,
-       8,    1,   86,    2, 0x08 /* Private */,
-      10,    1,   89,    2, 0x08 /* Private */,
-      12,    0,   92,    2, 0x08 /* Private */,
-      13,    0,   93,    2, 0x08 /* Private */,
-      14,    0,   94,    2, 0x08 /* Private */,
-      15,    0,   95,    2, 0x08 /* Private */,
-      16,    1,   96,    2, 0x08 /* Private */,
-      18,    0,   99,    2, 0x08 /* Private */,
-      19,    0,  100,    2, 0x08 /* Private */,
-      20,    0,  101,    2, 0x08 /* Private */,
+       6,    1,  103,    2, 0x08 /* Private */,
+       8,    1,  106,    2, 0x08 /* Private */,
+      10,    1,  109,    2, 0x08 /* Private */,
+      12,    3,  112,    2, 0x08 /* Private */,
+      16,    0,  119,    2, 0x08 /* Private */,
+      17,    0,  120,    2, 0x08 /* Private */,
+      18,    0,  121,    2, 0x08 /* Private */,
+      19,    0,  122,    2, 0x08 /* Private */,
+      20,    1,  123,    2, 0x08 /* Private */,
+      22,    0,  126,    2, 0x08 /* Private */,
+      23,    0,  127,    2, 0x08 /* Private */,
+      24,    0,  128,    2, 0x08 /* Private */,
+      25,    0,  129,    2, 0x08 /* Private */,
+      26,    0,  130,    2, 0x08 /* Private */,
+      27,    0,  131,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -104,11 +119,15 @@ static const uint qt_meta_data_winAiPhoto[] = {
     QMetaType::Void, 0x80000000 | 4,    7,
     QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void, QMetaType::Float,   11,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Bool,   13,   14,   15,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::Int,   21,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -127,14 +146,18 @@ void winAiPhoto::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->gotoAiPhoto_clicked_reshow((*reinterpret_cast< Mat(*)>(_a[1]))); break;
         case 3: _t->ReceiveMessage((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->ReceiveBpNetCrossEntroy((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 5: _t->on_PbBackToMain_clicked(); break;
-        case 6: _t->on_PbWinBeatify_clicked(); break;
-        case 7: _t->on_PbOpenFile_clicked(); break;
-        case 8: _t->on_PbSaveFile_clicked(); break;
-        case 9: _t->on_LwAiFun_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->on_PbFlash_clicked(); break;
-        case 11: _t->on_PbBpStartTrain_clicked(); break;
-        case 12: _t->on_PbBpEndTrain_clicked(); break;
+        case 5: _t->ReceiveBpTestResult((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 6: _t->on_PbBackToMain_clicked(); break;
+        case 7: _t->on_PbWinBeatify_clicked(); break;
+        case 8: _t->on_PbOpenFile_clicked(); break;
+        case 9: _t->on_PbSaveFile_clicked(); break;
+        case 10: _t->on_LwAiFun_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->on_PbFlash_clicked(); break;
+        case 12: _t->on_PbBpStartTrain_clicked(); break;
+        case 13: _t->on_PbBpEndTrain_clicked(); break;
+        case 14: _t->on_PbBpStartTest_clicked(); break;
+        case 15: _t->on_PbBpEndTest_clicked(); break;
+        case 16: _t->on_PbLNetFlash_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -181,13 +204,13 @@ int winAiPhoto::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 17;
     }
     return _id;
 }

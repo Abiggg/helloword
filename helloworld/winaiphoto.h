@@ -36,6 +36,7 @@ public:
     void StackWidgetInit();
     void LableEditInit();
     void BpLableEditInit();
+    void LNetLableEditInit();
     void winAiPhotoInit();
 
 signals:
@@ -48,6 +49,8 @@ private slots:
     void ReceiveMessage(int count);
 
     void ReceiveBpNetCrossEntroy(float CrossEntropy);
+
+    void ReceiveBpTestResult(int BpImageNum, int BpTestValue, bool BpTestIsTrue);
 
     void on_PbBackToMain_clicked();
 
@@ -64,6 +67,12 @@ private slots:
     void on_PbBpStartTrain_clicked();
 
     void on_PbBpEndTrain_clicked();
+
+    void on_PbBpStartTest_clicked();
+
+    void on_PbBpEndTest_clicked();
+
+    void on_PbLNetFlash_clicked();
 
 private:
     Ui::winAiPhoto *ui;

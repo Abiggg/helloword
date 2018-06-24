@@ -35,7 +35,8 @@ SOURCES += \
     threadfromqthread.cpp \
     mathlib.cpp \
     bpnetwork.cpp \
-    stdfile.cpp
+    stdfile.cpp \
+    lenet.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -49,7 +50,8 @@ HEADERS += \
     threadfromqthread.h \
     mathlib.h \
     bpnetwork.h \
-    stdfile.h
+    stdfile.h \
+    lenet.h
 
 FORMS += \
     mainwindow.ui \

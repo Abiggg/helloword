@@ -23,34 +23,31 @@ uint32 MatRealTransform(int num, Mat &matReal)
     return OK;
 }
 
-/*Sigmoid Function*/
-float Sigmoid(float x)
+/*Sigmoid Function-->test ok*/
+float Sigmoid(float x, int sigmoidA)
 {
-     return 1/(1+exp(-x));
+     return 1/(1 + exp(-1.0 /(float)sigmoidA  * x));
 }
 
-/*Diff Sigmoid*/
-float DiffSigmoid(float x)
+/*Diff Sigmoid-->test ok*/
+float DiffSigmoid(float x, int sigmoidA)
 {
-     return x * (1 - x);
+     return 1.0 /(float)sigmoidA * (x * (1 - x));
 }
 
-/*Transform Mat By Sigmoid Function*/
-void MatSigmoid(Mat matIn, Mat &matOut, Mat& matDiffSigmoid)
+/*Transform Mat By Sigmoid Function---->test ok*/
+void MatSigmoid(Mat matIn, Mat &matOut, Mat& matDiffSigmoid, int sigmoidA)
 {
-    int i;
     int j;
-    for(i=0;i<matIn.rows;i++)
+
+    for(j=0;j<matIn.cols;j++)
     {
-        for(j=0;j<matIn.cols;j++)
-        {
-            matOut.at<float>(i,j) = Sigmoid(matIn.at<float>(i,j));
-            matDiffSigmoid.at<float>(i,j) = DiffSigmoid(matIn.at<float>(i,j));
-        }
+        matOut.at<float>(0,j) = Sigmoid(matIn.at<float>(0,j), sigmoidA);
+        matDiffSigmoid.at<float>(0,j) = DiffSigmoid(matOut.at<float>(0,j), sigmoidA);
     }
 }
 
-/*Transform Mat By Softmat Fun*/
+/*Transform Mat By Softmat Fun--testok*/
 void MatSoftmax(Mat matIn, Mat &matOut)
 {
     int i = 0;
@@ -65,7 +62,7 @@ void MatSoftmax(Mat matIn, Mat &matOut)
     }
 }
 
-/*count Diff of softmax*/
+/*count Diff of softmax--testok*/
 void MatDiffSoftmax(Mat matOut, int pos, Mat matDiffSoftmax)
 {
     int i;
@@ -83,7 +80,7 @@ void MatDiffSoftmax(Mat matOut, int pos, Mat matDiffSoftmax)
 }
 
 
-/*Cout CrossEntropy*/
+/*Cout CrossEntropy-->testok*/
 float MatCrossEntropy(Mat matFct, Mat matReal, float& matDiffCrossEntropy, int& pos)
 {
     int i ;
@@ -93,8 +90,8 @@ float MatCrossEntropy(Mat matFct, Mat matReal, float& matDiffCrossEntropy, int& 
     {
         if((int)(matReal.at<uchar>(0,i)) >= 1)
         {
-            CrossEntropy = (float)log((double)matFct.at<float>(0,i));
-            matDiffCrossEntropy = 1.0 / matFct.at<float>(0,i);
+            CrossEntropy = (float)log((double)matFct.at<float>(0,i)) *(-1);
+            matDiffCrossEntropy = (-1.0) / matFct.at<float>(0,i);
             pos = i;
         }
         else
@@ -178,3 +175,48 @@ int MatMaxInt(Mat matX)
 }
 
 
+/*Decay Rate*/
+float DecayRate(float learnRate, float decay_rate,int global_step, int decay_steps)
+{
+    float tmplearnRate;
+    tmplearnRate = learnRate * pow(decay_rate, global_step / decay_steps);
+    return tmplearnRate;
+}
+
+/*Relu active*/
+float Relu(float x)
+{
+    if(x > 0)
+    {
+        return x;
+    }
+    else
+    {
+        return 0.0;
+    }
+}
+
+/*Diff Relu*/
+float DiffRelu(float x)
+{
+    if(x >0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/*Transform mat by Relu fun*/
+void MatRelu(Mat matIn, Mat &matOut, Mat &matDiffRelu)
+{
+    int j;
+
+    for(j=0;j<matIn.cols;j++)
+    {
+        matOut.at<float>(0,j) = Relu(matIn.at<float>(0,j));
+        matDiffRelu.at<float>(0,j) = DiffRelu(matIn.at<float>(0,j));
+    }
+}

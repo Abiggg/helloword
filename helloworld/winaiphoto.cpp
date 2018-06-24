@@ -32,8 +32,10 @@ void winAiPhoto::WinProgressBarInit()
 void winAiPhoto::AiThreadInit()
 {
     AiThread = new ThreadFromQthread();
+    AiThread->branch =1;
     connect(this->AiThread, SIGNAL(message(int)), this, SLOT(ReceiveMessage(int)));//当点击子界面时，调用主界面的reshow()函数
     connect(this->AiThread, SIGNAL(sendCrossEntropy(float)), this, SLOT(ReceiveBpNetCrossEntroy(float)));//当点击子界面时，调用主界面的reshow()函数
+    connect(this->AiThread, SIGNAL(sendBpTestResult(int, int, bool)), this, SLOT(ReceiveBpTestResult(int, int, bool)));//当点击子界面时，调用主界面的reshow()函数
 }
 
 void winAiPhoto::StackWidgetInit()
@@ -45,6 +47,7 @@ void winAiPhoto::LableEditInit()
 {
     /*BpLableEditInit*/
     BpLableEditInit();
+    LNetLableEditInit();
 }
 
 void winAiPhoto::BpLableEditInit()
@@ -53,12 +56,36 @@ void winAiPhoto::BpLableEditInit()
     ui->LeLableRoot->setText("/home/abig/project/project4/train_lable/train_lable.txt");
     ui->LeSaveRoot->setText("/home/abig/project/project4/train_lable/data.txt");
     ui->LeInNum->setText("784");
-    ui->LeHdNum->setText("700");
+    ui->LeHdNum->setText("500");
     ui->LeOutNum->setText("10");
 
-    ui->LeLearnRate->setText("0.5");
+    ui->LeLearnRate->setText("1");
     ui->LeBatchSize->setText("100");
     ui->LeTrainNum->setText("60000");
+}
+
+void winAiPhoto::LNetLableEditInit()
+{
+    ui->LeLNetImgRoot->setText("/home/abig/project/project4/train_image/");
+    ui->LeLNetLbRoot->setText("/home/abig/project/project4/train_lable/train_lable.txt");
+    ui->LeLNetSaveRoot->setText("/home/abig/project/project4/train_lable/data.txt");
+
+    ui->LeLNetBatchSize->setText("100");
+    ui->LeLNetLearnRate->setText("0.8");
+    ui->LeLNetTrainNum->setText("60000");
+
+    ui->LeLNetCon1Chl->setText("6");
+    ui->LeLNetCon1Size->setText("5");
+    ui->LeLNetPool1Size->setText("2");
+
+    ui->LeLNetCon2Chl->setText("16");
+    ui->LeLNetCon2Size->setText("5");
+    ui->LeLNetPool2Size->setText("2");
+
+    ui->LeLNetFc2Num->setText("120");
+    ui->LeLNetFc3Num->setText("84");
+    ui->LeLNetImgSize->setText("32");
+
 }
 
 /*StackWidget Init*/
@@ -135,6 +162,34 @@ void winAiPhoto::ReceiveBpNetCrossEntroy(float CrossEntropy)
     string strHint = "the cross Entropy is :" + to_string(CrossEntropy);
     ui->TbHint->setText(QString::fromStdString(strHint));
 }
+
+void winAiPhoto::ReceiveBpTestResult(int BpImageNum, int BpTestValue, bool BpTestIsTrue)
+{
+    QString QsImageRoot = ui->LeImageRoot->text();
+    string sImageRoot = QsImageRoot.toStdString();
+    sImageRoot = sImageRoot + to_string((int)BpImageNum) + ".png";
+    Mat matRead = imread(sImageRoot);
+    QImage qimg;
+    CHECK(QtCv.cvMat2QImage(matRead,qimg));
+    ui->LbInputImage->setPixmap(QPixmap::fromImage(qimg));
+
+    string strHint;
+    QFont font("Microsoft YaHei", 50, 75);
+    string strVaule = to_string((int)BpTestValue);
+    ui->LbOutputImage->setText(QString::fromStdString(strVaule));
+    ui->LbOutputImage->setFont(font);
+
+    if(BpTestIsTrue == true)
+    {
+         strHint = "Test Result is : True";
+    }
+    else
+    {
+         strHint = "Test Result is : false";
+    }
+    ui->TbHint->setText(QString::fromStdString(strHint));
+}
+
 
 /*Back to main*/
 void winAiPhoto::on_PbBackToMain_clicked()
@@ -241,9 +296,77 @@ void winAiPhoto::on_PbFlash_clicked()
     AiThread->bpNetwork.BpNetWortInit();
 }
 
+/*Flash LeNet*/
+void winAiPhoto::on_PbLNetFlash_clicked()
+{
+    QString QsLeLNetLbRoot = ui->LeLNetLbRoot->text();
+    QString QsLeLNetImgRoot = ui->LeLNetImgRoot->text();
+    QString QsLeLNetSaveRoot = ui->LeLNetSaveRoot->text();
+
+    QString QsLeLNetImgSize = ui->LeLNetImgSize->text();
+    QString QsLeLNetFc2Num = ui->LeLNetFc2Num->text();
+    QString QsLeLNetFc3Num = ui->LeLNetFc3Num->text();
+
+    QString QsLeLNetCon1Chl = ui->LeLNetCon1Chl->text();
+    QString QsLeLNetCon1Size = ui->LeLNetCon1Size->text();
+    QString QsLeLNetPool1Size = ui->LeLNetPool1Size->text();
+    \
+    QString QsLeLNetCon2Chl = ui->LeLNetCon2Chl->text();
+    QString QsLeLNetCon2Size = ui->LeLNetCon2Size->text();
+    QString QsLeLNetPool2Size = ui->LeLNetPool2Size->text();
+
+    QString QsLeLNetLearnRate = ui->LeLNetLearnRate->text();
+    QString QsLeLNetBatchSize = ui->LeLNetBatchSize->text();
+    QString QsLeLNetTrainNum = ui->LeLNetTrainNum->text();
+
+    string sLeLNetLbRoot = QsLeLNetLbRoot.toStdString();
+    string sLeLNetImgRoot = QsLeLNetImgRoot.toStdString();
+    string sLeLNetSaveRoot = QsLeLNetSaveRoot.toStdString();
+
+    string sLeLNetImgSize = QsLeLNetImgSize.toStdString();
+    string sLeLNetFc2Num = QsLeLNetFc2Num.toStdString();
+    string sLeLNetFc3Num = QsLeLNetFc3Num.toStdString();
+
+    string sLeLNetCon1Chl = QsLeLNetCon1Chl.toStdString();
+    string sLeLNetCon1Size = QsLeLNetCon1Size.toStdString();
+    string sLeLNetPool1Size = QsLeLNetPool1Size.toStdString();
+
+    string sLeLNetCon2Chl = QsLeLNetCon2Chl.toStdString();
+    string sLeLNetCon2Size = QsLeLNetCon2Size.toStdString();
+    string sLeLNetPool2Size = QsLeLNetPool2Size.toStdString();
+
+    string sLeLNetLearnRate = QsLeLNetLearnRate.toStdString();
+    string sLeLNetBatchSize = QsLeLNetBatchSize.toStdString();
+    string sLeLNetTrainNum = QsLeLNetTrainNum.toStdString();
+
+    AiThread->leNet.sLNetLableRoot = sLeLNetLbRoot;
+    AiThread->leNet.sLNetImageRoot = sLeLNetImgRoot;
+    AiThread->leNet.sLNetSaveRoot = sLeLNetSaveRoot;
+
+    AiThread->leNet.LNetImgSize = atoi(sLeLNetImgSize.c_str());
+    AiThread->leNet.LNetFc2Num = atof(sLeLNetFc2Num.c_str());
+    AiThread->leNet.LNetFc3Num = atof(sLeLNetFc3Num.c_str());
+
+    AiThread->leNet.LNetCon1Size = atoi(sLeLNetCon1Size.c_str());
+    AiThread->leNet.LNetCon1Chl = atoi(sLeLNetCon1Chl.c_str());
+    AiThread->leNet.LNetPool1Size = atoi(sLeLNetPool1Size.c_str());
+
+    AiThread->leNet.LNetCon2Size = atoi(sLeLNetCon2Size.c_str());
+    AiThread->leNet.LNetCon2Chl = atoi(sLeLNetCon2Chl.c_str());
+    AiThread->leNet.LNetPoo21Size = atoi(sLeLNetPool2Size.c_str());
+
+    AiThread->leNet.LNetLearnRate = atof(sLeLNetLearnRate.c_str());
+    AiThread->leNet.LNetBatchSize = atof(sLeLNetBatchSize.c_str());
+    AiThread->leNet.LNetTrainNum = atof(sLeLNetTrainNum.c_str());
+
+    AiThread->leNet.LeNetInit();
+}
+
+
 /*Start Bp Train*/
 void winAiPhoto::on_PbBpStartTrain_clicked()
 {
+    AiThread->branch =1;
     if(AiThread->isRunning())
     {
         return;
@@ -254,5 +377,24 @@ void winAiPhoto::on_PbBpStartTrain_clicked()
 /*End Bp Train*/
 void winAiPhoto::on_PbBpEndTrain_clicked()
 {
+    AiThread->bpNetwork.BpNetWorkSaveData();
     AiThread->terminate();  /*end this thread*/
 }
+
+/*Start Bp Test*/
+void winAiPhoto::on_PbBpStartTest_clicked()
+{
+    AiThread->branch = 2;
+    if(AiThread->isRunning())
+    {
+        return;
+    }
+     AiThread->start(); /*Start a thread*/
+}
+
+/*End Bp Test*/
+void winAiPhoto::on_PbBpEndTest_clicked()
+{
+    AiThread->terminate();  /*end this thread*/
+}
+

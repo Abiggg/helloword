@@ -234,7 +234,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="SwpKnn">
     <widget class="QLabel" name="label_8">
@@ -571,17 +571,414 @@
     </widget>
    </widget>
    <widget class="QWidget" name="SwpCnnLet">
-    <widget class="QLabel" name="label_13">
+    <widget class="QLineEdit" name="LeLNetTrainNum">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>130</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetBatchSize">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>130</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetLearnRate">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>130</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetCon1Size">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>170</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetCon1Chl">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>170</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetPool1Size">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>170</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetFc2Num">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>170</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Fc2 Num</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetFc3Num">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>210</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Fc3 Num</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetImgSize">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>130</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetFc2Num">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>170</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetFc3Num">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>210</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetSaveRoot">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>80</y>
+       <width>581</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetSaveRoot">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>80</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Save Root</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetImgRoot">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>40</y>
+       <width>581</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetLbRoot">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Lable Root</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetLbRoot">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>0</y>
+       <width>581</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetImgRoot">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image Root</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetTrainNum">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>0</y>
+       <y>130</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Train Num</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetCon1Size">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Con1 Size</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetBtSize">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>130</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Batch Size</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetLearnRate">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>130</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LearnRate</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetImgSize">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>130</y>
        <width>71</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Cnn</string>
+      <string>Img Size</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetCon1Chl">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>170</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Con1 Chl</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetPoolSize">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>170</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pool1 Size</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetCon2Size">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>210</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetCon2Chl">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>210</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="LeLNetPool2Size">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>210</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PbLNetStartTest">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>250</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start Test</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PbLNetEndTrain">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>250</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>End Train</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PbLNetEndTest">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>250</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>End Test</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PbLNetFlash">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>250</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Flash</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PbLNetStartTrain">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>250</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start Train</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetCon2Size">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Con2 Size</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetCon2Chl">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>210</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Con2 Chl</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LbLNetPool2Size">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>210</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pool2 Size</string>
      </property>
     </widget>
    </widget>
@@ -692,6 +1089,45 @@
      </font>
     </property>
    </item>
+  </widget>
+  <widget class="QLabel" name="LbBpImageRoot_9">
+   <property name="geometry">
+    <rect>
+     <x>1060</x>
+     <y>1110</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pool 1 Size</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LbBpImageRoot_10">
+   <property name="geometry">
+    <rect>
+     <x>870</x>
+     <y>1110</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Con1 Chl</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LbBpImageRoot_11">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>1110</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Con1 Size</string>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -10,18 +10,22 @@
 #include <QKeyEvent>
 
 #include "bpnetwork.h"
+#include "lenet.h"
 
 class ThreadFromQthread : public QThread
 {
     Q_OBJECT
+
 signals:
     void message(int count);
     void progess(int present);
     void sendCameraStatus(bool isPhoto);
     void sendCrossEntropy(float CrossEntropy);
+    void sendBpTestResult(int BpImageNum, int value, bool isTrue);
 
 public slots:
     void StopImmediately();
+
 public:
     ThreadFromQthread(QObject * parent = 0);
     ~ThreadFromQthread();
@@ -32,16 +36,15 @@ public:
     void run();
 
 public:
+    int branch;
     bool isPhoto;
     BpNetwork bpNetwork;
+    LeNet leNet;
 
 private:
     int RunCount;
     QMutex islock;
     bool isCanRun;
-
-
-
 };
 
 #endif // THREADFROMQTHREAD_H

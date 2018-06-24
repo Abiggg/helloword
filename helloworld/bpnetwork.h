@@ -31,13 +31,14 @@ public:
     ~BpNetwork();
     uint32 BpNetWortInit();
     uint32 BpNetWorkTrain();
-    uint32 BpNetWorkTest();
+    uint32 BpNetWorkTest(int TestNum, Mat& matIn, int& expectValue, bool& isTrue);
+    uint32 BpNetWorkSaveData();
 
 public:
     uint32 MatToLine(Mat matIn, Mat& matOut);
     uint32 MatInit();
     uint32 DataInit();
-    float BpForwardPgt(Mat matIn, Mat matReal, bool& isTrue);
+    float BpForwardPgt(Mat matIn, Mat matReal, bool& isTrue, int& expectValue);
     uint32 WeightBiasAdj();
 
 private:
@@ -46,12 +47,13 @@ private:
     Mat matWeightHdOut;
     Mat matBiasHdOut;
 
-    Mat matWeightInHdTemp;
-    Mat matBiasInHdTemp;
-    Mat matWeightHdOutTemp;
-    Mat matBiasHdOutTemp;
+    Mat matWeightInHdSum;
+    Mat matBiasInHdSum;
+    Mat matWeightHdOutSum;
+    Mat matBiasHdOutSum;
 
     int* TrainLable;
+    bool BpReadDataLock;
 
 };
 
