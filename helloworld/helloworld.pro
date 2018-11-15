@@ -36,7 +36,8 @@ SOURCES += \
     mathlib.cpp \
     bpnetwork.cpp \
     stdfile.cpp \
-    lenet.cpp
+    lenet.cpp \
+    knn.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     mathlib.h \
     bpnetwork.h \
     stdfile.h \
-    lenet.h
+    lenet.h \
+    knn.h
 
 FORMS += \
     mainwindow.ui \

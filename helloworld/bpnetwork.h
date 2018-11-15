@@ -28,7 +28,7 @@ public:
     float CrossEntropy;
 public:
     BpNetwork();
-    ~BpNetwork();
+    virtual ~BpNetwork();
     uint32 BpNetWortInit();
     uint32 BpNetWorkTrain();
     uint32 BpNetWorkTest(int TestNum, Mat& matIn, int& expectValue, bool& isTrue);

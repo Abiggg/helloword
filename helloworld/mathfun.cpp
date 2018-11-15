@@ -5,6 +5,11 @@
 MathFun::MathFun()
 {
 }
+
+MathFun::~MathFun()
+{
+
+}
 int MathFun::Binary(int x, uint32 Binarythresholds)
 {
     if( x<=(int)Binarythresholds)

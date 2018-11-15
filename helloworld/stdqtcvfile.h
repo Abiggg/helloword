@@ -11,13 +11,13 @@
 using namespace cv;
 using namespace std;
 
-class QtCvFile : public QWidget
+class QtCvFile : public QWidget, public MathFun
 {    
     Q_OBJECT
 
     public:
         QtCvFile();  //construction function
-
+        virtual ~QtCvFile();
         uint32 OpenImageFile(Mat& mat);  //Open image File
         uint32 SaveImageFile(Mat mat);  //Save image File
         uint32 cvMat2QImage(Mat mat, QImage& Qimg); //convert mat to QImage

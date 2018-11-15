@@ -11,6 +11,7 @@
 
 #include "bpnetwork.h"
 #include "lenet.h"
+#include "knn.h"
 
 class ThreadFromQthread : public QThread
 {
@@ -28,7 +29,7 @@ public slots:
 
 public:
     ThreadFromQthread(QObject * parent = 0);
-    ~ThreadFromQthread();
+    virtual ~ThreadFromQthread();
 
     void keyPressEvent(QKeyEvent *k);
     void SetRunCount(int count);
@@ -40,6 +41,7 @@ public:
     bool isPhoto;
     BpNetwork bpNetwork;
     LeNet leNet;
+    Knn knn;
 
 private:
     int RunCount;

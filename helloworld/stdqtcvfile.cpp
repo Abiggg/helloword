@@ -19,6 +19,11 @@ QtCvFile::QtCvFile()
 
 }
 
+QtCvFile::~QtCvFile()
+{
+
+}
+
 /*Open File*/
 uint32 QtCvFile::OpenImageFile(Mat& mat)
 {
@@ -289,12 +294,12 @@ unsigned int QtCvFile::GaussianFilter(unsigned char FilterSize, unsigned int sum
     float normalization;
     for(chl=0;chl<3;chl++)
     {
-         normalization = mathfun.GaussianFun(0,0,FilterSize,sigma);
+         normalization = GaussianFun(0,0,FilterSize,sigma);
         for(i=0;i<FilterSize;i++)
         {
             for(j=0;j<FilterSize;j++)
             {
-                Filter.at<Vec3b>(i,j)[chl] = mathfun.GaussianFun(i,j,FilterSize,sigma)/normalization;
+                Filter.at<Vec3b>(i,j)[chl] = GaussianFun(i,j,FilterSize,sigma)/normalization;
                 sum[chl] += Filter.at<Vec3b>(i,j)[chl];
             }
         }
@@ -364,7 +369,7 @@ unsigned int QtCvFile::HistogramTransform(Mat InputMat, int distribution[3][255]
         for(i=0;i<255;i++)
         {
            sum += distribution[chl][i] * 255.0 / pix;
-           temp[chl][i] = mathfun.PixLimit((int)sum);
+           temp[chl][i] = PixLimit((int)sum);
            //cout<<temp[chl][i]<<endl;
         }
         sum = 0;
@@ -399,11 +404,11 @@ uint32 QtCvFile::BinaryTransform(Mat InputMat, Mat &OutputMat, uint32 BinaryThre
             {
                 if(InputMat.channels() == 1)
                 {
-                    OutputMat.at<uchar>(i,j) =mathfun.Binary(InputMat.at<uchar>(i,j), BinaryThrehold);
+                    OutputMat.at<uchar>(i,j) =Binary(InputMat.at<uchar>(i,j), BinaryThrehold);
                 }
                 else if(InputMat.channels() == 3)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] =mathfun.Binary(InputMat.at<Vec3b>(i,j)[chl], BinaryThrehold);
+                    OutputMat.at<Vec3b>(i,j)[chl] =Binary(InputMat.at<Vec3b>(i,j)[chl], BinaryThrehold);
                 }
                 else
                 {
@@ -447,11 +452,11 @@ unsigned int QtCvFile::DataTypeTransform(Mat InputMat, Mat &OutputMat)
             {
                 if(InputMat.channels() == 1)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] = mathfun.DataTranstrom((int)InputMat.at<Vec3f>(i,j)[chl]);
+                    OutputMat.at<Vec3b>(i,j)[chl] = DataTranstrom((int)InputMat.at<Vec3f>(i,j)[chl]);
                 }
                 else if(InputMat.channels() == 3)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] = mathfun.DataTranstrom((int)InputMat.at<Vec3f>(i,j)[chl]);
+                    OutputMat.at<Vec3b>(i,j)[chl] = DataTranstrom((int)InputMat.at<Vec3f>(i,j)[chl]);
                 }
                 else
                 {
@@ -577,7 +582,7 @@ unsigned int QtCvFile::RatationTransform(Mat InputMat, Mat &OutputMat, int angle
     int x = 0;
     int y = 0;
 
-    mathfun.CountRatationSize(InputMat, radian, width, height); /*Count size after ratation*/
+    CountRatationSize(InputMat, radian, width, height); /*Count size after ratation*/
     if(InputMat.channels() == 1)
     {
          OutputMat = Mat::zeros(height, width, CV_8UC1);
@@ -622,7 +627,7 @@ unsigned int QtCvFile::BrightTransform(Mat InputMat, Mat &OutputMat, unsigned in
     int chl = 0;
     float floartRatioBrightness = (RatioBrightness - 100.0)/100.0*128.0;
     //uint8 RgbMean[3] = {0};
-    //mathfun.CountRgbMean(InputMat,RgbMean);
+    //CountRgbMean(InputMat,RgbMean);
 
     if(InputMat.channels()==1)
     {
@@ -630,8 +635,8 @@ unsigned int QtCvFile::BrightTransform(Mat InputMat, Mat &OutputMat, unsigned in
         {
             for(j=0;j<InputMat.cols;j++)
             {
-                //OutputMat.at<uchar>(i,j) = mathfun.PixLimit((int)(InputMat.at<uchar>(i,j) + floartRatioBrightness*RgbMean[0]));
-                OutputMat.at<uchar>(i,j) = mathfun.PixLimit((int)(InputMat.at<uchar>(i,j) + (int)floartRatioBrightness));
+                //OutputMat.at<uchar>(i,j) = PixLimit((int)(InputMat.at<uchar>(i,j) + floartRatioBrightness*RgbMean[0]));
+                OutputMat.at<uchar>(i,j) = PixLimit((int)(InputMat.at<uchar>(i,j) + (int)floartRatioBrightness));
             }
         }
     }
@@ -643,8 +648,8 @@ unsigned int QtCvFile::BrightTransform(Mat InputMat, Mat &OutputMat, unsigned in
             {
                 for(j=0;j<InputMat.cols;j++)
                 {
-                   // OutputMat.at<Vec3b>(i,j)[chl] = mathfun.PixLimit((int)(InputMat.at<Vec3b>(i,j)[chl] + floartRatioBrightness*RgbMean[chl]));
-                    OutputMat.at<Vec3b>(i,j)[chl] = mathfun.PixLimit((int)(InputMat.at<Vec3b>(i,j)[chl] + (int)floartRatioBrightness));                }
+                   // OutputMat.at<Vec3b>(i,j)[chl] = PixLimit((int)(InputMat.at<Vec3b>(i,j)[chl] + floartRatioBrightness*RgbMean[chl]));
+                    OutputMat.at<Vec3b>(i,j)[chl] = PixLimit((int)(InputMat.at<Vec3b>(i,j)[chl] + (int)floartRatioBrightness));                }
             }
         }
     }
@@ -669,7 +674,7 @@ unsigned int QtCvFile::ConstrastTransform(Mat InputMat, Mat &OutputMat, unsigned
         {
             for(j=0;j<InputMat.cols;j++)
             {
-                OutputMat.at<uchar>(i,j) = mathfun.PixLimit(((float)InputMat.at<uchar>(i,j) - 128.0) * floartRatioConstrast + (float)InputMat.at<uchar>(i,j));
+                OutputMat.at<uchar>(i,j) = PixLimit(((float)InputMat.at<uchar>(i,j) - 128.0) * floartRatioConstrast + (float)InputMat.at<uchar>(i,j));
             }
         }
     }
@@ -681,7 +686,7 @@ unsigned int QtCvFile::ConstrastTransform(Mat InputMat, Mat &OutputMat, unsigned
             {
                 for(j=0;j<InputMat.cols;j++)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] = mathfun.PixLimit(((float)InputMat.at<Vec3b>(i,j)[chl] - 128.0) * floartRatioConstrast + \
+                    OutputMat.at<Vec3b>(i,j)[chl] = PixLimit(((float)InputMat.at<Vec3b>(i,j)[chl] - 128.0) * floartRatioConstrast + \
                                                                      (float)(InputMat.at<Vec3b>(i,j)[chl]));
                 }
             }
@@ -712,7 +717,7 @@ unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigne
     float Saturation[3] = {0};
     float alpha[3] = {0};
 
-    mathfun.CountRgbMaxMin(InputMat, RgbMax, RgbMin);
+    CountRgbMaxMin(InputMat, RgbMax, RgbMin);
 
     if(InputMat.channels()==1)
     {
@@ -744,7 +749,7 @@ unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigne
             {
                 for(j=0;j<InputMat.cols;j++)
                 {
-                    OutputMat.at<uchar>(i,j) = mathfun.PixLimit(((float)InputMat.at<uchar>(i,j) - Lightness[0]*255.0) * alpha[0] + (float)InputMat.at<uchar>(i,j));
+                    OutputMat.at<uchar>(i,j) = PixLimit(((float)InputMat.at<uchar>(i,j) - Lightness[0]*255.0) * alpha[0] + (float)InputMat.at<uchar>(i,j));
                 }
             }
         }
@@ -755,7 +760,7 @@ unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigne
             {
                 for(j=0;j<InputMat.cols;j++)
                 {
-                    OutputMat.at<uchar>(i,j) = mathfun.PixLimit(((float)InputMat.at<uchar>(i,j) - Lightness[0] * 255.0) * (alpha[0] + 1) + Lightness[0]*255.0);
+                    OutputMat.at<uchar>(i,j) = PixLimit(((float)InputMat.at<uchar>(i,j) - Lightness[0] * 255.0) * (alpha[0] + 1) + Lightness[0]*255.0);
                 }
             }
         }
@@ -791,7 +796,7 @@ unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigne
             {
                 for(j=0;j<InputMat.cols;j++)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] = mathfun.PixLimit((InputMat.at<Vec3b>(i,j)[chl] - Lightness[chl]*255) * alpha[chl] + InputMat.at<Vec3b>(i,j)[chl]);
+                    OutputMat.at<Vec3b>(i,j)[chl] = PixLimit((InputMat.at<Vec3b>(i,j)[chl] - Lightness[chl]*255) * alpha[chl] + InputMat.at<Vec3b>(i,j)[chl]);
                 }
             }
         }
@@ -802,7 +807,7 @@ unsigned int QtCvFile::SaturationTransform(Mat InputMat, Mat &OutputMat, unsigne
             {
                 for(j=0;j<InputMat.cols;j++)
                 {
-                    OutputMat.at<Vec3b>(i,j)[chl] = mathfun.PixLimit((InputMat.at<Vec3b>(i,j)[chl] - Lightness[chl] * 255) * (alpha[chl] + 1.0) + Lightness[chl]*255);
+                    OutputMat.at<Vec3b>(i,j)[chl] = PixLimit((InputMat.at<Vec3b>(i,j)[chl] - Lightness[chl] * 255) * (alpha[chl] + 1.0) + Lightness[chl]*255);
                 }
             }
         }
@@ -868,9 +873,9 @@ unsigned int QtCvFile::NearInterTransform(Mat InputMat, Mat &OutputMat)
 
 unsigned int QtCvFile::fftTransform(Mat InputMat, Mat &OutputMat)
 {
-    Mat initMat = mathfun.initFFT2(InputMat);
-    mathfun.FFT2(initMat, OutputMat);
-    mathfun.IFFT2(OutputMat, OutputMat);
+    Mat initMat = initFFT2(InputMat);
+    FFT2(initMat, OutputMat);
+    IFFT2(OutputMat, OutputMat);
     return OK;
 }
 
@@ -1189,10 +1194,10 @@ unsigned int QtCvFile::ClassicalTransform(Mat InputMat, Mat &OutputMat)
                 BgrSrc[0] = InputMat.at<Vec3b>(i,j)[0];
                 BgrSrc[1] = InputMat.at<Vec3b>(i,j)[1];
                 BgrSrc[2] = InputMat.at<Vec3b>(i,j)[2];
-                mathfun.CoutClassical(BgrSrc,BgrDst);
-                OutputMat.at<Vec3b>(i,j)[0] = mathfun.PixLimit(BgrDst[0]);
-                OutputMat.at<Vec3b>(i,j)[1] = mathfun.PixLimit(BgrDst[1]);
-                OutputMat.at<Vec3b>(i,j)[2] = mathfun.PixLimit(BgrDst[2]);
+                CoutClassical(BgrSrc,BgrDst);
+                OutputMat.at<Vec3b>(i,j)[0] = PixLimit(BgrDst[0]);
+                OutputMat.at<Vec3b>(i,j)[1] = PixLimit(BgrDst[1]);
+                OutputMat.at<Vec3b>(i,j)[2] = PixLimit(BgrDst[2]);
             }
         }
     }
@@ -1544,7 +1549,7 @@ uint32 QtCvFile::FilterCountSum(Mat InputMat, Mat& OutputMat, Mat Filter)
                                  }
 
                             }
-                            OutputMat.at<uchar>(i,j) = mathfun.PixLimit(abs(sum));
+                            OutputMat.at<uchar>(i,j) = PixLimit(abs(sum));
                             sum = 0;
                         }
                     }
@@ -1582,7 +1587,7 @@ uint32 QtCvFile::FilterCountSum(Mat InputMat, Mat& OutputMat, Mat Filter)
                                      sum += (int)(InputMat.at<Vec3b>(key_rows,key_cols)[chl] * Filter.at<Vec3f>(filter_i,filter_j)[chl]);
                                  }
                             }
-                            OutputMat.at<Vec3b>(i,j)[chl] = mathfun.PixLimit(abs(sum));
+                            OutputMat.at<Vec3b>(i,j)[chl] = PixLimit(abs(sum));
                             sum = 0;
                         }
                     }

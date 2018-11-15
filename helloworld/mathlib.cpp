@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 /*rand value function (-1, 1)*/
 float GetRamdom_B1_1()
 {

@@ -23,7 +23,7 @@ class winAiPhoto : public QWidget
 
 public:
     explicit winAiPhoto(QWidget *parent = 0);
-    ~winAiPhoto();
+    virtual ~winAiPhoto();
 
 public:
     Mat matIn;
@@ -37,6 +37,7 @@ public:
     void LableEditInit();
     void BpLableEditInit();
     void LNetLableEditInit();
+    void KnnLableEditInit();
     void winAiPhotoInit();
 
 signals:
@@ -74,10 +75,13 @@ private slots:
 
     void on_PbLNetFlash_clicked();
 
+    void on_PbLNetStartTrain_clicked();
+
+    void on_PbLNetEndTrain_clicked();
+
 private:
     Ui::winAiPhoto *ui;
     ThreadFromQthread *AiThread;
-    //BpNetwork bpNetwork;
 
     QtCvFile QtCv;
     stdImageBasic ImageBasic;

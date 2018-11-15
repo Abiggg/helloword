@@ -62,7 +62,8 @@ SOURCES       = ../helloworld/main.cpp \
 		../helloworld/mathlib.cpp \
 		../helloworld/bpnetwork.cpp \
 		../helloworld/stdfile.cpp \
-		../helloworld/lenet.cpp qrc_defaultphoto.cpp \
+		../helloworld/lenet.cpp \
+		../helloworld/knn.cpp qrc_defaultphoto.cpp \
 		moc_mainwindow.cpp \
 		moc_stdqtcvfile.cpp \
 		moc_stdimagebasic.cpp \
@@ -82,6 +83,7 @@ OBJECTS       = main.o \
 		bpnetwork.o \
 		stdfile.o \
 		lenet.o \
+		knn.o \
 		qrc_defaultphoto.o \
 		moc_mainwindow.o \
 		moc_stdqtcvfile.o \
@@ -276,7 +278,8 @@ DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../helloworld/mathlib.h \
 		../helloworld/bpnetwork.h \
 		../helloworld/stdfile.h \
-		../helloworld/lenet.h ../helloworld/main.cpp \
+		../helloworld/lenet.h \
+		../helloworld/knn.h ../helloworld/main.cpp \
 		../helloworld/mainwindow.cpp \
 		../helloworld/stdqtcvfile.cpp \
 		../helloworld/stdimagebasic.cpp \
@@ -288,7 +291,8 @@ DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../helloworld/mathlib.cpp \
 		../helloworld/bpnetwork.cpp \
 		../helloworld/stdfile.cpp \
-		../helloworld/lenet.cpp
+		../helloworld/lenet.cpp \
+		../helloworld/knn.cpp
 QMAKE_TARGET  = helloworld
 DESTDIR       = 
 TARGET        = helloworld
@@ -677,8 +681,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../helloworld/defaultphoto.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../helloworld/mainwindow.h ../helloworld/stddatatype.h ../helloworld/stdqtcvfile.h ../helloworld/stdimagebasic.h ../helloworld/mathfun.h ../helloworld/winbeatifyphoto.h ../helloworld/winaiphoto.h ../helloworld/datast.h ../helloworld/threadfromqthread.h ../helloworld/mathlib.h ../helloworld/bpnetwork.h ../helloworld/stdfile.h ../helloworld/lenet.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../helloworld/main.cpp ../helloworld/mainwindow.cpp ../helloworld/stdqtcvfile.cpp ../helloworld/stdimagebasic.cpp ../helloworld/mathfun.cpp ../helloworld/winbeatifyphoto.cpp ../helloworld/winaiphoto.cpp ../helloworld/datast.cpp ../helloworld/threadfromqthread.cpp ../helloworld/mathlib.cpp ../helloworld/bpnetwork.cpp ../helloworld/stdfile.cpp ../helloworld/lenet.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../helloworld/mainwindow.h ../helloworld/stddatatype.h ../helloworld/stdqtcvfile.h ../helloworld/stdimagebasic.h ../helloworld/mathfun.h ../helloworld/winbeatifyphoto.h ../helloworld/winaiphoto.h ../helloworld/datast.h ../helloworld/threadfromqthread.h ../helloworld/mathlib.h ../helloworld/bpnetwork.h ../helloworld/stdfile.h ../helloworld/lenet.h ../helloworld/knn.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../helloworld/main.cpp ../helloworld/mainwindow.cpp ../helloworld/stdqtcvfile.cpp ../helloworld/stdimagebasic.cpp ../helloworld/mathfun.cpp ../helloworld/winbeatifyphoto.cpp ../helloworld/winaiphoto.cpp ../helloworld/datast.cpp ../helloworld/threadfromqthread.cpp ../helloworld/mathlib.cpp ../helloworld/bpnetwork.cpp ../helloworld/stdfile.cpp ../helloworld/lenet.cpp ../helloworld/knn.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../helloworld/mainwindow.ui ../helloworld/winbeatifyphoto.ui ../helloworld/winaiphoto.ui $(DISTDIR)/
 
 
@@ -957,6 +961,7 @@ moc_mainwindow.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
 		../helloworld/bpnetwork.h \
+		../helloworld/lenet.h \
 		../helloworld/mainwindow.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
@@ -1525,6 +1530,7 @@ moc_winaiphoto.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
 		../helloworld/bpnetwork.h \
+		../helloworld/lenet.h \
 		../helloworld/winaiphoto.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
@@ -1754,6 +1760,7 @@ moc_threadfromqthread.cpp: /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QWidget
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
 		../helloworld/bpnetwork.h \
 		../helloworld/stddatatype.h \
+		../helloworld/lenet.h \
 		../helloworld/threadfromqthread.h \
 		moc_predefs.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/bin/moc
@@ -2030,7 +2037,8 @@ main.o: ../helloworld/main.cpp /opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAp
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
-		../helloworld/bpnetwork.h
+		../helloworld/bpnetwork.h \
+		../helloworld/lenet.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../helloworld/main.cpp
 
 mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
@@ -2271,6 +2279,7 @@ mainwindow.o: ../helloworld/mainwindow.cpp ../helloworld/mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
 		../helloworld/bpnetwork.h \
+		../helloworld/lenet.h \
 		ui_mainwindow.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAction \
@@ -2821,7 +2830,8 @@ winbeatifyphoto.o: ../helloworld/winbeatifyphoto.cpp ../helloworld/winbeatifypho
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qxmlstream.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
-		../helloworld/bpnetwork.h
+		../helloworld/bpnetwork.h \
+		../helloworld/lenet.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o winbeatifyphoto.o ../helloworld/winbeatifyphoto.cpp
 
 winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
@@ -3054,6 +3064,7 @@ winaiphoto.o: ../helloworld/winaiphoto.cpp ../helloworld/winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
 		../helloworld/bpnetwork.h \
+		../helloworld/lenet.h \
 		ui_winaiphoto.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtWidgets/QAction \
@@ -3342,7 +3353,8 @@ threadfromqthread.o: ../helloworld/threadfromqthread.cpp ../helloworld/threadfro
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtCore/qtcoreversion.h \
 		/opt/Qt5.10.0/5.10.0/gcc_64/include/QtGui/QKeyEvent \
 		../helloworld/bpnetwork.h \
-		../helloworld/stddatatype.h
+		../helloworld/stddatatype.h \
+		../helloworld/lenet.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o threadfromqthread.o ../helloworld/threadfromqthread.cpp
 
 mathlib.o: ../helloworld/mathlib.cpp ../helloworld/mathlib.h \
@@ -3556,9 +3568,16 @@ stdfile.o: ../helloworld/stdfile.cpp ../helloworld/stdfile.h \
 		../helloworld/stddatatype.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stdfile.o ../helloworld/stdfile.cpp
 
-lenet.o: ../helloworld/lenet.cpp ../helloworld/lenet.h \
-		../helloworld/stddatatype.h
+lenet.o: ../helloworld/lenet.cpp ../helloworld/stdfile.h \
+		../helloworld/stddatatype.h \
+		../helloworld/lenet.h \
+		../helloworld/mathlib.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lenet.o ../helloworld/lenet.cpp
+
+knn.o: ../helloworld/knn.cpp ../helloworld/knn.h \
+		../helloworld/mathlib.h \
+		../helloworld/stddatatype.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o knn.o ../helloworld/knn.cpp
 
 qrc_defaultphoto.o: qrc_defaultphoto.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_defaultphoto.o qrc_defaultphoto.cpp

@@ -64,9 +64,14 @@ void ThreadFromQthread::run()
                 emit sendBpTestResult(TestNum, BpTestValue, BpTestIsTrue);
                 TestNum ++;
                 continue;
-
-            case 3:
+            case 3: /*leNetTrain*/
+                leNet.LeNetTrain();
+                continue;
+            case 4:
                 //QKeyEventDetect();
+                continue;
+            case 5:
+            //QKeyEventDetect();
             default:
                 cout<<"error"<<endl;
         }

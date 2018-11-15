@@ -23,7 +23,7 @@ class MathFun
 {
 public:
     MathFun();
-
+    virtual ~MathFun();
 public:
     /*binary function*/
     int Binary(int x, uint32 Binarythreshold);

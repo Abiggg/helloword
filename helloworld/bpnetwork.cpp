@@ -162,10 +162,10 @@ float BpNetwork::BpForwardPgt(Mat matIn, Mat matReal, bool& isTrue, int& expectV
 /*Weight and Bias adjusment*/
 unsigned int BpNetwork::WeightBiasAdj()
 {
-    matWeightInHd = matWeightInHd - matWeightInHdSum / BatchSize * LearingRate -0.0001*matWeightInHd;
-    matBiasInHd = matBiasInHd - matBiasInHdSum / BatchSize  * LearingRate -0.0001 * matBiasInHd;
-    matWeightHdOut = matWeightHdOut - matWeightHdOutSum / BatchSize  * LearingRate -0.0001 * matWeightHdOut;
-    matBiasHdOut = matBiasHdOut - matBiasHdOutSum / BatchSize  * LearingRate -0.0001 * matBiasHdOut;
+    matWeightInHd = matWeightInHd - matWeightInHdSum / BatchSize * LearingRate;
+    matBiasInHd = matBiasInHd - matBiasInHdSum / BatchSize  * LearingRate;
+    matWeightHdOut = matWeightHdOut - matWeightHdOutSum / BatchSize  * LearingRate;
+    matBiasHdOut = matBiasHdOut - matBiasHdOutSum / BatchSize  * LearingRate;
 
     matWeightInHdSum =  Mat::zeros(inNum, hdNum, CV_32FC1);
     matBiasInHdSum = Mat::zeros(1, hdNum, CV_32FC1);
@@ -196,7 +196,7 @@ unsigned int BpNetwork::BpNetWorkTrain()
 
         /*Get Image*/
         string ImageName = sImageRoot + to_string((int)i) + ".png";
-        matIn = imread(ImageName);
+        matIn = imread(ImageName, 0);
 
         /*ForwardPgt*/
         tmp =BpForwardPgt(matIn, matReal, isTrue, expectValue);
@@ -246,7 +246,7 @@ unsigned int BpNetwork::BpNetWorkTest(int TestNum, Mat& matIn, int& expectValue,
 
     /*Get Image*/
     string ImageName = sImageRoot + to_string(int(TestNum)) + ".png";
-    matIn = imread(ImageName);
+    matIn = imread(ImageName, 0);
 
     /*ForwardPgt*/
     BpForwardPgt(matIn, matReal, isTrue, expectValue);

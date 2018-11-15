@@ -74,17 +74,22 @@ void winAiPhoto::LNetLableEditInit()
     ui->LeLNetLearnRate->setText("0.8");
     ui->LeLNetTrainNum->setText("60000");
 
-    ui->LeLNetCon1Chl->setText("6");
+    ui->LeLNetCon1Chl->setText("3");
     ui->LeLNetCon1Size->setText("5");
     ui->LeLNetPool1Size->setText("2");
 
-    ui->LeLNetCon2Chl->setText("16");
+    ui->LeLNetCon2Chl->setText("6");
     ui->LeLNetCon2Size->setText("5");
     ui->LeLNetPool2Size->setText("2");
 
     ui->LeLNetFc2Num->setText("120");
     ui->LeLNetFc3Num->setText("84");
-    ui->LeLNetImgSize->setText("32");
+    ui->LeLNetImgSize->setText("28");
+
+}
+
+void winAiPhoto::KnnLableEditInit()
+{
 
 }
 
@@ -105,6 +110,9 @@ void winAiPhoto::winAiPhotoInit()
 
     /*LableEditInit*/
     LableEditInit();
+
+    /*Knn LableEditInit*/
+    KnnLableEditInit();
 
     /*init Input and Output Box*/
     if(PhotoFlag)
@@ -333,6 +341,7 @@ void winAiPhoto::on_PbLNetFlash_clicked()
 
     string sLeLNetCon2Chl = QsLeLNetCon2Chl.toStdString();
     string sLeLNetCon2Size = QsLeLNetCon2Size.toStdString();
+
     string sLeLNetPool2Size = QsLeLNetPool2Size.toStdString();
 
     string sLeLNetLearnRate = QsLeLNetLearnRate.toStdString();
@@ -361,7 +370,6 @@ void winAiPhoto::on_PbLNetFlash_clicked()
 
     AiThread->leNet.LeNetInit();
 }
-
 
 /*Start Bp Train*/
 void winAiPhoto::on_PbBpStartTrain_clicked()
@@ -397,4 +405,21 @@ void winAiPhoto::on_PbBpEndTest_clicked()
 {
     AiThread->terminate();  /*end this thread*/
 }
+
+/*Start LeNet Train*/
+void winAiPhoto::on_PbLNetStartTrain_clicked()
+{
+    AiThread->branch =3;
+    if(AiThread->isRunning())
+    {
+        return;
+    }
+     AiThread->start(); /*Start a thread*/
+}
+
+void winAiPhoto::on_PbLNetEndTrain_clicked()
+{
+
+}
+
 

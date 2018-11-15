@@ -36,30 +36,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::OpenCamera()
 {
-#if 0
-    Mat frame;
-    VideoCapture cap(0);
-    namedWindow("Live", 0);
-    if(!cap.isOpened())
-    {
-        cout<<"camera opened failed"<<endl;
-    }
-
-    while(1)
-    {
-        cap>>frame;
-        srcMat = frame;
-        CHECK(QtCv.cvMat2QImage(frame,srcQImg));
-        ui->LbCameraArea->setPixmap(QPixmap::fromImage(srcQImg));
-        if(waitKey(30)>= 0)
-        {
-            cap.release();
-            imshow("Live", frame);
-            destroyWindow("Live");
-            break;
-        }
-    }
-#endif
     Mat frame;
     VideoCapture cap(0);
     ThreadMainWinInit();
@@ -103,36 +79,13 @@ void MainWindow::ThreadMainWinInit()
 
 void MainWindow::reshow()
 {
-    this->show();
+    show();
 }
 
 void MainWindow::on_PbPhotoGraph_clicked()
 {
     OpenCamera();
 }
-
-#if 0
-void MainWindow::on_PbBeautifyPhoto_clicked()
-{
-    this->hide();//主界面关闭
-    WinBeatifyPhoto *BeatifyPhoto = new WinBeatifyPhoto();//新建子界面
-    connect(BeatifyPhoto,SIGNAL(WinDisplay()),this,SLOT(reshow()));//当点击子界面时，调用主界面的reshow()函数
-
-    BeatifyPhoto->matIn = srcMat;
-    BeatifyPhoto->QImgIn = srcQImg;
-    if(!srcMat.empty())
-    {
-         BeatifyPhoto->PhotoFlag = true;
-    }
-    else
-    {
-        BeatifyPhoto->PhotoFlag = false;
-    }
-    BeatifyPhoto->WinInit();
-    BeatifyPhoto->show();//子界面出现
-}
-#endif
-
 
 /*open BeautifyPhoto win*/
 void MainWindow::on_PbBeautifyPhoto_clicked()

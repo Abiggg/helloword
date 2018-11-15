@@ -37,7 +37,7 @@ public:
 
 public:
     explicit WinBeatifyPhoto(QWidget *parent = 0);
-    ~WinBeatifyPhoto();
+    virtual ~WinBeatifyPhoto();
 
 signals:
     /*emit signal to back to mainwind*/

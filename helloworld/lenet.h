@@ -10,6 +10,9 @@
 using namespace cv;
 using namespace std;
 
+#define CON1CHL 3
+#define CON2CHL 6
+
 class LeNet
 {
 public:
@@ -45,22 +48,25 @@ public:
    int LeNetTrain();
    int LeNetTest(int TestNum, Mat& matIn, int& expectValue, bool& isTrue);
 
-private:
-   Mat LNetCon1[6];
-   Mat LNetCon2[16];
 
-   Mat LNetCon1Sum[6];
-   Mat LNetCon2Sum[16];
+private:
+   Mat matLNetCon1[CON1CHL];
+   Mat matLNetBase1[CON1CHL];
+   Mat matLNetCon2[CON2CHL];
+   Mat matLNetBase2[CON2CHL];
 
    int* LNetTrainLable;
    bool LNetReadDataLock;
 
 private:
    int LeNetMatInit();
-
    int LeNetDataInit();
-
+   Mat MattoFloat(Mat matIn);
+   float matConvFun(Mat matIn,Mat MatConv,int row, int col);
+   float matPoolMax(Mat matIn, int poolSize, int row, int col);
    float LeNetForWard(Mat matIn, Mat matReal, bool& isTrue, int& expectValue);
+   int Conv(Mat matIn[], int InNum, Mat matConv[], int ConNum, Mat matBias[], Mat matOut[], int Strides, int isPadding);
+   int Pool(Mat matIn[], int InNum, Mat matOut[], int poolSize, int Strides, int isPadding);
 
 
 };
